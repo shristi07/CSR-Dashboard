@@ -1,0 +1,21 @@
+.left-panel {
+  width: 220px;
+  background-color: #354558;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  .sidebar-menu-container {
+    .sidebar-menu {
+        .nav-header {
+            background: url("../../assets/images/patterns/header-profile.png") no-repeat;
+            a {
+                color: #DFE4ED;
+              }
+          }
+      .sidebar-menu-list {
+        text-decoration: none;
+        list-style: none;
+      }
+    }
+  }
+}

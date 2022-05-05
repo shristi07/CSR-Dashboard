@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+import React from "react";
+import {Provider} from "react-redux";
+import store from "./AppStore/store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
+import Routers from "../src/components/Routes/Route";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+console.log("!!!!! ----AlphaClanUI-v-0.1.0 ---- !!!!!!");
+
+const App = props => {
+
+  return <Provider store={store}>
+    <div id="app-container" className="app">
+      <ToastContainer/>
+      <Routers/>
     </div>
-  );
+  </Provider>;
 }
 
 export default App;
+
