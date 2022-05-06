@@ -25,11 +25,6 @@ const AppSidebar = props => {
         "vertical": null
       }
     const data = [
-        {
-            name: "Dashboard",
-            icon: "faTachometer",
-            link: "/",
-          },
           {
             name: "My Profile",
             icon: "analytics",
@@ -54,7 +49,7 @@ const AppSidebar = props => {
             classNames={"ani-sidebar"}
             mountOnEnter
           > */}
-            <div className={`sidebar-menu-container `}>
+            <div className={`left-panel sidebar-menu-container `}>
               <div
                 className={`sidebar-menu `}
               >

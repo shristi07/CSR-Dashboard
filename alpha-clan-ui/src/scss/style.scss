@@ -1,3 +1,9 @@
+@import 'base/variables.scss';
+@import 'base/global';
+
+
 @import './components/Login.scss';
 @import './components/sidebar';
-@import './components/global';
+@import './components/header';
+@import './components/body';
+@import './components//table'

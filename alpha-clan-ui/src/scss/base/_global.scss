@@ -1,0 +1,131 @@
+
+body {
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color:#676a6c;
+ 
+    font-size: 13px;
+  }
+  ul{
+    list-style: none;
+  }
+  a {
+    cursor: pointer;
+    color: #999c9e;
+    align-items: center;
+  }
+  
+  a:hover, a:focus {
+    text-decoration: none;
+    color: #999c9e;
+  }
+  
+  .border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  }
+
+.app{
+    display: flex;
+}
+
+.navbar.navbar-static-top {
+  background: #fff;
+}
+.nav-tabs > li > a {
+  color: #A7B1C2;
+  font-weight: 600;
+  padding: 10px 20px 10px 25px;
+}
+
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  background-color: #e6e6e6;
+  color: $text-color;
+}
+.modal-content{
+.modal-header{
+  justify-content: center;
+}
+.modal-body{
+  .info{
+    position: relative;
+    top: 25px;
+    left: 65px;
+  }
+}
+.form-label{
+  font-weight: 700;
+  font-size: 14px;
+}
+.form-group{
+  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+}
+.button{
+  font-size: 14px;
+  width: 120px;
+}
+.submit-button{
+  background-color: $navy;
+  border-color: $navy;
+}
+.submit-button:hover, .submit-button:focus{
+  background-color: #189b80;
+  box-shadow: unset;
+}
+.cancel-button{
+  color: $dark-gray;
+  border-color: $dark-gray;
+}
+.cancel-button:hover{
+  color: $text-color;
+  border-color: $text-color;
+  background-color: unset;
+
+}
+.required {
+  color: $red;
+}
+i{
+  margin-right: 5px;
+  font-size: 15px;
+}
+.panel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    .left-panel {
+      width: 220px;
+      background-color: #354558;
+    }
+    .right-panel{
+        background-color: #f3f3f4;
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        
+    }
+
+}
+.card-align{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-widget-basic {
+  margin: 10px auto;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  box-shadow: $box-shadow;
+  .card-widget-header {
+    padding: 15px;
+    border-bottom: 1px solid $border-color;
+    h6{
+      margin-bottom: unset;
+    }
+  }
+  .card-widget-body {
+    
+  }
+}

@@ -149,32 +149,18 @@ const MainContainer = props => {
       false ?
         <></> : <>
           <div className="panel-container">
-            <div
-              className={
-                true
-                  ? "left-panel"
-                  : "left-panel sidebar-collapse"
-              }
-            >
+            <div className="left-panel">
               <AppSidebar
-              />
-            </div>
-            <div
-              className={
-                true
-                  ? "right-panel"
-                  : "right-panel sidebar-collapse"
-              }
-            >
+              /></div>
+              <div className="right-panel">
               <AppHeader
                 // handleClick={handleHamburgerToggle}
               />
 
                 <AppBody/>
+              </div>
+              
             </div>
-
-
-          </div>
         </>
     }
   </>;

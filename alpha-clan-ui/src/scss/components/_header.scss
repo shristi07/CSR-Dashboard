@@ -1,0 +1,23 @@
+.app-header-container{
+    min-height: 10%;
+    padding: 0 20px;
+    min-height: 60px;
+    .hamburger-icon{
+        padding: 3px 13px;
+        font-size: 15px;
+  background-color: $navy;
+  border-color: $navy;
+  color: #FFF;
+  border-radius: 3px;
+  cursor: pointer;
+
+    }
+    .logout-icon{
+        padding-right: 40px;
+        a{
+            font-size: 14px;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+    }
+}
