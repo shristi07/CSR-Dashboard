@@ -1,5 +1,6 @@
 import React, {Suspense, useCallback, useEffect, useState} from "react";
 import AppBody from "../Body/AppBody";
+import AppFooter from "../Footer/Footer";
 import AppHeader from "../Header/AppHeader";
 import AppSidebar from "../Sidebar/AppSidebar";
 
@@ -158,6 +159,8 @@ const MainContainer = props => {
               />
 
                 <AppBody/>
+                <AppFooter
+      />
               </div>
               
             </div>

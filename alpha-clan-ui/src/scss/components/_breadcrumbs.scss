@@ -1,0 +1,44 @@
+// $color: darken($secondary, 5);
+
+.breadcrumbs-container {
+  // margin: 10px 0 0 15px;
+  font-size: 15px;
+  // color: $color;
+
+  .breadcrumb {
+    all: unset;
+    position: relative;
+    //padding: 0 7px 0 0;
+    margin: 0 15px 0 0;
+    transition: all 0.3s ease-out;
+    // color: $color;
+    text-transform: capitalize;
+
+    &:after {
+      content: "/";
+      // color: $color;
+      position: absolute;
+      //right: 0;
+      top: 0;
+      bottom: 0;
+      margin: 0 0 0 4px;
+    }
+
+    &:last-child {
+      pointer-events: none;
+      font-weight: 700;
+      // color: $primaryColor;
+
+      &:after {
+        content: unset;
+      }
+    }
+
+    &:hover {
+      color: $nav-bg;
+    }
+  }
+  &.hide{
+    display: none;
+  }
+}

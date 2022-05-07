@@ -25,20 +25,16 @@ const AppSidebar = props => {
         "vertical": null
       }
     const data = [
+      
           {
             name: "My Profile",
             icon: "analytics",
-            link: "/myProfile",
+            link: "/profile",
           },
           {
-            name: "Pratimaas",
+            name: "Pahal",
             icon: "analytics",
-            link: "/pratimaas",
-          },
-          {
-            name: "Paatra",
-            icon: "analytics",
-            link: "/paatra",
+            link: "/pahal",
           },
         ]
 
@@ -76,7 +72,7 @@ const AppSidebar = props => {
     //   } ${disabled && "disabled"} ${hideVisibility && "hide-visibility"}`}
       style={{position: "relative"}}
     >
-     <FontAwesomeIcon icon={item.icon} />
+     {/* <FontAwesomeIcon icon={item.icon} /> */}
       <span >{item.name}</span>
     </NavLink>
                    </li>)}

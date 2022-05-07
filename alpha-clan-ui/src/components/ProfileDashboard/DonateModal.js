@@ -6,18 +6,32 @@ import InputTags from "../TagInput/InputTags";
 
 
 
-const DonateModal = () => {
+const DonateModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
     const [show, setShow] = useState(false);
 
     const [category, setCategory] = useState("amount");
     const [frequency, setFrequency] = useState();
-    const [amount, setAmount] = useState(false);
+    const [amount, setAmount] = useState("");
     const [donateItem, setDonateItem] = useState();
     const [comment, setComment] = useState("");
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+      setShow(false);
+      onHideSetIsEdit(false);
+    }
     const handleShow = () => setShow(true);
-  console.log("cate",category);
+    useEffect(() => {
+      if (isEdit) {
+        console.log("ko",rowData.donation);
+        setShow(true);
+        setCategory(rowData?.donation_category==="Monetory Donation"?"amount":"item");
+        {rowData?.donation_category==="Monetory Donation"?setAmount(rowData.donation):setDonateItem(rowData.donation.split(","))}
+        setComment(rowData?.comment);
+        console.log(category,donateItem);
+        
+      }
+    }, [isEdit,rowData]);
+    console.log("donateItem",donateItem);
     return (
       <>
         <Button className="button submit-button" variant="success" onClick={handleShow}>
@@ -26,7 +40,7 @@ const DonateModal = () => {
   
         <Modal size="md" show={show} onHide={handleClose}>
           <Modal.Header>
-            <Modal.Title>Create Donation Request</Modal.Title>
+            <Modal.Title>{isEdit?"Edit Donation Request":"Create Donation Request"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form.Group className="form-group" as={Row}>
@@ -79,13 +93,13 @@ const DonateModal = () => {
         styles={{
           control: (styles) => ({ ...styles, backgroundColor: '#23c6c8' })}}
                       data={[
-                        { value: 'books', label: 'books'},
-                        { value: 'clothes', label: 'Clothing'},
-                        { value: 'toys', label: 'Toys'},
-                        { value: 'electronics', label: 'Electronic Item'},
-                        { value: 'blankets', label: 'Linen/Blankets'},
-                        { value: 'furniture', label: 'Furniture'},
-                        { value: 'other', label: 'Other'},
+                        { value: 'Books', label: 'Books'},
+                        { value: 'Linen/Blankets', label: 'Linen/Blankets'},
+                        { value: 'Clothing', label: 'Clothing'},
+                        { value: 'Toys', label: 'Toys'},
+                        { value: 'Electronic Item', label: 'Electronic Item'},
+                        { value: 'Furniture', label: 'Furniture'},
+                        { value: 'Other', label: 'Other'},
                       ]}
                     
                     /> }
@@ -113,7 +127,7 @@ const DonateModal = () => {
           <Form.Control
             id={"amount"}
             name={"amount"}
-            type={"number"}
+            type={"text"}
             value={amount}
             placeholder={""}
             onChange={({target: {value}}) => {
@@ -132,7 +146,7 @@ const DonateModal = () => {
               Cancel
             </Button>
             <Button variant="success" className="button submit-button" onClick={handleClose}>
-              Submit
+              {isEdit?"Save":"Submit"}
             </Button>
           </Modal.Footer>
         </Modal>
@@ -141,13 +155,12 @@ const DonateModal = () => {
   };
 
 DonateModal.propTypes = {
-  editReport: PropTypes.bool,
-  onHideSetEditFormRow: PropTypes.func,
-  reportData: PropTypes.object.isRequired,
-  editCreateReportData: PropTypes.func,
+  isEdit: PropTypes.bool,
+  onHideSetEdit: PropTypes.func,
+  rowData: PropTypes.object.isRequired,
 };
 DonateModal.defaultProps = {
-  editReport: false,
+  isEdit: false,
 };
 
 export default DonateModal;

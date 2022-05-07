@@ -4,17 +4,30 @@ import PropTypes from "prop-types";
 import Icon from "@material-ui/core/Icon";
 import InputTags from "../TagInput/InputTags";
 
-const FundRaiserModal = () => {
+const FundRaiserModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
   const [show, setShow] = useState(false);
   const [cause, setCause] = useState();//medical emergency/demise/other
   const [fundsFor, setFundsFor] = useState("");//name
   const [relation, setRelation] = useState(""); //medical(Co-worker/Family/Friend/Other)
   const [upperLimit, setUpperLimit] = useState();
   const [summary, setSummary] = useState("");
-  const [dueDate, setDueDate] = useState();
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    onHideSetIsEdit(false);
+  }
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    if (isEdit) {
+      console.log(rowData);
+      setShow(true);
+      setCause(rowData.donation_category==="Medical Emergency"?"medical":"Demise"?"demise":"other");
+      setRelation(rowData.relation);
+      setFundsFor(rowData.name);
+      setSummary(rowData.comment);
+      setUpperLimit(rowData.fund_aim);   
+    }
+  }, [isEdit,rowData]);
   return (
     <>
       <Button
@@ -27,7 +40,7 @@ const FundRaiserModal = () => {
 
       <Modal size="md" show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Start A Fundraiser</Modal.Title>
+          <Modal.Title>{isEdit ? "Edit Fund Raiser Request" : "Start A Fundraiser"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form.Group className="form-group" as={Row}>
@@ -74,10 +87,10 @@ const FundRaiserModal = () => {
                   setRelation(value);
                 }}
               >
-                <option selected  value="family">Family</option>
-                <option value="co-worker">Co-Worker </option>
-                <option value="friend">Friend </option>
-                <option value="other">Other </option>
+                <option selected  value="Family">Family</option>
+                <option value="Co-Worker">Co-Worker </option>
+                <option value="Friend">Friend </option>
+                <option value="Other">Other </option>
               </Form.Control></Col>
           
           <Form.Control.Feedback type={"invalid"}>This field is required!</Form.Control.Feedback>
@@ -138,13 +151,13 @@ const FundRaiserModal = () => {
 };
 
 FundRaiserModal.propTypes = {
-  editReport: PropTypes.bool,
-  onHideSetEditFormRow: PropTypes.func,
-  reportData: PropTypes.object.isRequired,
-  editCreateReportData: PropTypes.func,
+  isEdit: PropTypes.bool,
+  onHideSetEdit: PropTypes.func,
+  rowData: PropTypes.object.isRequired,
 };
 FundRaiserModal.defaultProps = {
-  editReport: false,
+  isEdit: false,
 };
+
 
 export default FundRaiserModal;

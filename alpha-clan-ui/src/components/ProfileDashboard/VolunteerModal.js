@@ -4,12 +4,24 @@ import PropTypes from "prop-types";
 import Icon from "@material-ui/core/Icon";
 import InputTags from "../TagInput/InputTags";
 
-const VolunteerModal = () => {
+const VolunteerModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
   const [show, setShow] = useState(false);
   const [volunteer, setVolunteer] = useState();
-
-  const handleClose = () => setShow(false);
+  
+  const handleClose = () => {
+    setShow(false);
+    onHideSetIsEdit(false);
+  }
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    if (isEdit) {
+      setShow(true);
+      setVolunteer(rowData?.volunteer_at);
+  // console.log(volunteer);
+      
+    }
+  }, [isEdit,rowData]);
 
   return (
     <>
@@ -23,7 +35,7 @@ const VolunteerModal = () => {
 
       <Modal size="md" show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Create Volunteer Request</Modal.Title>
+          <Modal.Title>{isEdit ? "Edit Volunteer Request" : "Create Volunteer Request"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="form-group" as={Row}>
@@ -57,7 +69,7 @@ const VolunteerModal = () => {
             className="button submit-button"
             onClick={handleClose}
           >
-            Submit
+             {isEdit?"Save":"Submit"}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -66,13 +78,12 @@ const VolunteerModal = () => {
 };
 
 VolunteerModal.propTypes = {
-  editReport: PropTypes.bool,
-  onHideSetEditFormRow: PropTypes.func,
-  reportData: PropTypes.object.isRequired,
-  editCreateReportData: PropTypes.func,
+  isEdit: PropTypes.bool,
+  onHideSetEdit: PropTypes.func,
+  rowData: PropTypes.object.isRequired,
 };
 VolunteerModal.defaultProps = {
-  editReport: false,
+  isEdit: false,
 };
 
 export default VolunteerModal;

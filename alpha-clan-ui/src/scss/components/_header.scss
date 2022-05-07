@@ -3,6 +3,9 @@
     padding: 0 20px;
     min-height: 60px;
     .hamburger-icon{
+        i{
+            margin-right: unset;
+        }
         padding: 3px 13px;
         font-size: 15px;
   background-color: $navy;
