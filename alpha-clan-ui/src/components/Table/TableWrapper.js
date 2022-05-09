@@ -11,7 +11,7 @@ import {
 } from "react-table";
 import Icon from "@material-ui/core/Icon";
 import {Dropdown, DropdownButton, FormControl, InputGroup, Row,} from "react-bootstrap";
-import {CSVLink} from "react-csv";
+// import {CSVLink} from "react-csv";
 
 import {CSSTransition, SwitchTransition} from "react-transition-group";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";

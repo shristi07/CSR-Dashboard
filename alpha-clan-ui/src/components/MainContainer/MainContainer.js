@@ -9,7 +9,7 @@ import AppSidebar from "../Sidebar/AppSidebar";
 // const AppBody = React.lazy(() => lazyComponentLoader(() => import( "../Body/AppBody")));
 
 const MainContainer = props => {
-  // const [sidebarExpand, setSidebarExpand] = useState(true);
+  const [style, setStyle] = useState("panel-container");
 //   const [showResponsiveSidebar, setShowResponseSidebar] = useState(false);
 //   const [isUserTourEnabled, setIsUserTourEnabled] = useState(false);
 
@@ -147,9 +147,12 @@ const MainContainer = props => {
           <div className="panel-container">
             <div className="left-panel">
               <AppSidebar userData={userData}
+                style={style}
               /></div>
               <div className="right-panel">
               <AppHeader
+               style={style}
+               setStyle={setStyle}
                 // handleClick={handleHamburgerToggle}
               />
 

@@ -27,7 +27,7 @@ const Profile = ({crumbs}) => {
     userData: state.userReducer.userData,
   }));
 
-  console.log(myContributions);
+  // console.log(myContributions);
   
   const onEditClick = useCallback(
     (selectedRows) => {
