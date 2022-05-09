@@ -1,102 +1,99 @@
-.profile-container{
-    .app-body{
-        .my-profile{
+.profile-container {
+  .app-body {
+    .my-profile {
+      display: flex;
+      width: 96%;
+      margin: 0 auto;
+      column-gap: 2%;
+
+      .profile-container {
+        width: 59%;
+        height: 230px;
+        justify-content: center;
+        .pic-container {
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          img {
+            width: 155px;
+            height: 150px;
+            border-radius: 50%;
+          }
+        }
+        .card-container {
+          width: 48%;
+
+          .profile-card {
+            box-shadow: unset;
+            border-radius: 5px;
+            height: 55px;
+            padding: 5px 15px;
+            .key{
+              font-size: 15px;
+            }
+            .value {
+              font-weight: 600;
+              text-align: right;
+            }
+          }
+          .profile-card:hover {
+            // background-color: $navy;
+            // color: #fff;
+            cursor: pointer;
+            box-shadow: $box-shadow;
+          }
+        }
+      }
+      .score-container {
+        width: 41%;
+        height: 230px;
+        .star-image {
+          // background-image: url("../../assets/images/silver-badge.png");
+          width: 50%;
+          height: 80%;
+          background-size: contain;
+          background-repeat: no-repeat;
+          &.gold-badge {
+            background-image: url("../../assets/images/gold-badge.png");
+          }
+          &.silver-badge {
+            background-image: url("../../assets/images/silver-badge.png");
+            height: 60%;
+            width: 40%;
+            margin-left: 30px;
+          }
+          &.bronze-badge {
+            background-image: url("../../assets/images/bronze-badge.png");
+          }
+        }
+        .score-info {
+          width: 50%;
+          flex-direction: column;
+          .information {
+            column-gap: 60px;
+            .key {
+              font-weight: 600;
+            }
+          }
+          i, .key, .value {
+            font-size: 15px;
+          }
+          .redeem {
+            padding: 4px 12px;
+            color: #fff;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+    .contribution-status-container {
+      width: 96%;
+      min-height: 150px;
+      .card-widget-body {
         display: flex;
-        width: 96%;
-        margin: 0 auto;
-        column-gap: 2%;
-
-        .profile-container{
-            width: 59%;
-            height: 230px;
-            justify-content: center;
-            .pic-container{
-                width: 40%;
-                display: flex;
-                justify-content: center;
-                img{
-                width: 155px;
-                height: 150px;
-                border-radius: 50%;}
-
-            }
-            .card-container{
-                width: 48%;
-                
-                .profile-card{
-                    box-shadow: unset;
-    border-radius: 5px;
-    height: 55px;
-    padding: 5px 15px;
-    .value{
-        font-weight: 600;
-        text-align: right;
+        padding: 15px;
+        justify-content: center;
+      }
     }
-                }
-                .profile-card:hover{
-                    // background-color: $navy;
-                    // color: #fff;
-                    cursor: pointer;
-                    box-shadow: $box-shadow;
-                }
-
-            }
-        }
-        .score-container{
-            width: 41%;
-            height: 230px;
-            .star-image{
-                // background-image: url("../../assets/images/silver-badge.png");
-                width: 50%;
-                height: 80%;
-                background-size: contain;
-                background-repeat: no-repeat;
-                &.gold-badge{
-                background-image: url("../../assets/images/gold-badge.png");
-
-                }
-                &.silver-badge{
-                background-image: url("../../assets/images/silver-badge.png");
-                height: 60%;
-    width: 40%;
-    margin-left: 30px;
-                    
-                }
-                &.bronze-badge{
-                background-image: url("../../assets/images/bronze-badge.png");
-                    
-                }
-            }
-            .score-info{
-                width: 50%;
-                flex-direction: column;
-                .information{
-                    column-gap: 60px;
-                    .key{
-                        font-weight: 700;
-                    }
-                }
-                i{
-                    font-size: 15px;
-                    
-                }
-                .redeem{
-                    padding: 4px 12px;
-                    color: #fff;
-                    margin-top: 20px;   
-                }
-            }
-
-        }
-    }
-    .contribution-status-container{
-        width: 96%;
-        min-height: 150px;
-        .card-widget-body{
-            display: flex;
-            padding: 15px;
-            justify-content: center;
-        }
-    }
-}
+  }
 }

@@ -1,11 +1,14 @@
 import React, { useCallback, useState } from "react";
 import Breadcrumbs from "../../config/Breadcrumbs";
 import { Link, Typography } from "@material-ui/core";
-import VolunteerModal from "./VolunteerModal";
-import DonateModal from "./DonateModal";
-import FundraiserModal from "./FundraiserModal";
+import VolunteerModal from "../Modals/VolunteerModal";
+import DonateModal from "../Modals/DonateModal";
+import FundraiserModal from "../Modals/FundraiserModal";
 import TableWrapper from "../Table/TableWrapper";
 import { OverlayTrigger,Tooltip } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteContributionRequest } from "../../Actions/ProfileActions";
 
 const Profile = ({crumbs}) => {
   const [activeCardId, setActiveCardId] = useState(0);
@@ -13,204 +16,27 @@ const Profile = ({crumbs}) => {
   const [isVolunteerEdit, setIsVolunteerEdit] = useState(false);
   const [isFundraiserEdit, setIsFundraiserEdit] = useState(false);
   const [rowData, setRowData] = useState({});
+
+  const{
+    myContributions,
+    profileCard,
+    userData
+
+  }=useSelector((state) => ({
+    ...state.profileReducer,
+    userData: state.userReducer.userData,
+  }));
+
+  console.log(myContributions);
   
   const onEditClick = useCallback(
     (selectedRows) => {
       setRowData(selectedRows);
       {activeCardId===0?setIsDonationEdit(true):activeCardId===1?setIsVolunteerEdit(true):setIsFundraiserEdit(true)}
-      console.log("entering",activeCardId,isDonateEdit,isVolunteerEdit,isFundraiserEdit); 
     },
     [setRowData,activeCardId,setIsDonationEdit,setIsFundraiserEdit,setIsVolunteerEdit]
   );
-  console.log("crum",crumbs);
-  const socialScore = 230;
-  const myContributions=[{
-    "contribution_id":0,
-    "headers": [
-      {
-        "Header": "Donation Category",
-        "accessor": "donation_category"
-      },
-      {
-        "Header": "Donation Made",
-        "accessor": "donation"
-      },
-      {
-        "Header": "Requested On",
-        "accessor": "requested_on"
-      },
-      {
-        "Header": "Request Status",
-        "accessor": "status"
-      },
-      {
-        "Header": "Social Score",
-        "accessor": "social_score"
-      },
-      {
-        "Header": "Actions",
-        "accessor": "actions"
-      }
-    ],
-    "data": [
-      {
-        "donation_category": "Monetory Donation",
-        "donation":"300",
-        "requested_on": "19-04-2021",
-        "status": "Complete",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "donation_category": "Monetory Donation",
-        "donation":"300",
-        "requested_on": "19-04-2021",
-        "status": "Complete",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "donation_category": "Charity Donation",
-        "donation":[{label:"Book",value:"Book"},{ value: 'Linen/Blankets', label: 'Linen/Blankets'}],
-        "requested_on": "19-04-2021",
-        "status": "Pending",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "donation_category": "Monetory Donation",
-        "donation":"300",
-        "requested_on": "19-04-2021",
-        "status": "Complete",
-        "social_score": 20,
-        actions: ""
-      }
-    ]
-  },
-  {
-    "contribution_id":1,
-    "headers": [
-      {
-        "Header": "Volunteer At",
-        "accessor": "volunteer_at"
-      },
-      {
-        "Header": "Requested On",
-        "accessor": "requested_on"
-      },
-      {
-        "Header": "Request Status",
-        "accessor": "status"
-      },
-      {
-        "Header": "Social Score",
-        "accessor": "social_score"
-      },
-      {
-        "Header": "Actions",
-        "accessor": "actions"
-      }
-    ],
-    "data": [
-      {
-        "volunteer_at": [{label:"Tree Plantation Drive",value:"Tree Plantation Drive"}],
 
-        "requested_on": "19-04-2021",
-        "status": "Pending",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "volunteer_at": [{label:"Tree Plantation Drive",value:"Tree Plantation Drive"}],
-        "requested_on": "19-04-2021",
-        "status": "Complete",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "volunteer_at": [{label:"Blanket Distribution",value:"Blanket Distribution"}],
-        "requested_on": "19-04-2021",
-        "status": "Complete",
-        "social_score": 20,
-        actions: ""
-      },
-      {
-        "volunteer_at": [{label:"Blanket Distribution",value:"Blanket Distribution"}],
-        "requested_on": "19-04-2021",
-        "status": "Pending",
-        "social_score": 20,
-        actions: ""
-      }
-    ]
-  },
-  {
-    "contribution_id":2,
-    "headers": [
-      {
-        "Header": "Cause",
-        "accessor": "cause"
-      },
-      {
-        "Header": "Funds For",
-        "accessor": "name"
-      },
-      {
-        "Header": "Relation",
-        "accessor": "relation"
-      },
-      {
-        "Header": "Fund Aim",
-        "accessor": "fund_aim"
-      },
-      {
-        "Header": "Requested On",
-        "accessor": "requested_on"
-      },
-      {
-        "Header": "Request Status",
-        "accessor": "status"
-      },
-      {
-        "Header": "Social Score",
-        "accessor": "social_score"
-      },
-      {
-        "Header": "Comment",
-        "accessor": "comment"
-      },
-      {
-        "Header": "Actions",
-        "accessor": "actions"
-      }
-    ],
-    "data": [
-      {
-        "cause": "Medical Emergency",
-        "name":"Vishnu",
-        "relation":"Family",
-        "fund_aim":30000,
-        "requested_on": "19-04-2021",
-        "status": "Pending",
-        "social_score": 50,
-        "comment":"We Lost Vishnu in a Car accident",
-        "actions": ""
-      },
-    ]
-  }
-]
-  const badgeType = (value) => {
-    switch (value) {
-      case true:
-        return "gold-bagde";
-      case value > 100:
-        return "silver-bagde";
-      case value > 0:
-        return "bronze-bagde";
-
-      default:
-        break;
-    }
-  };
   const extractFormat = (value) => {
     let tempArr = [];
     value?.forEach(item=>{for (let i in item){tempArr.push(item[i])}})
@@ -218,7 +44,7 @@ const Profile = ({crumbs}) => {
     return format;
 
   };
-
+  const dispatch= useDispatch();
   return (
     <>
       <div class=" profile-container">
@@ -232,18 +58,23 @@ const Profile = ({crumbs}) => {
           <div className="contribution-container card-align">
             <VolunteerModal isEdit={isVolunteerEdit}
             rowData={rowData}
+            onSumitSetActiveCard={()=>{setActiveCardId(1)}}
             onHideSetIsEdit={(val) => {
               setIsVolunteerEdit(val);
               setRowData({});
             }}/>
             <DonateModal isEdit={isDonateEdit}
             rowData={rowData}
+            onSumitSetActiveCard={()=>{setActiveCardId(0)}}
+
             onHideSetIsEdit={(val) => {
               setIsDonationEdit(val);
               setRowData({});
             }}/>
             <FundraiserModal isEdit={isFundraiserEdit}
             rowData={rowData}
+            onSumitSetActiveCard={()=>{setActiveCardId(2)}}
+
             onHideSetIsEdit={(val) => {
               setIsFundraiserEdit(val);
               setRowData({});
@@ -257,11 +88,8 @@ const Profile = ({crumbs}) => {
                 <img src="https://success-factor.s3.amazonaws.com/prod/profilePicFolder/408b47cd-af04-448f-9bcb-eea42ab4ae49_Shristi-Katiyar-Profile-Pitcure.jpeg" />
               </div>
               <div className="card-container">
-                {[
-                  { key: "Donations Made", value: "4", id: 0 },
-                  { key: "Volunteered", value: "4", id: 1 },
-                  { key: "Fundraiser Initiated", value: "1", id: 2 },
-                ].map((card, index) => (
+                {profileCard.map((card, index) => ( 
+
                   <div
                     onClick={() => setActiveCardId(card.id)}
                     style={
@@ -272,7 +100,7 @@ const Profile = ({crumbs}) => {
                     className="card-widget-basic profile-card "
                   >
                     <h6 className="key">{card.key}</h6>
-                    <h6 className="value">{card.value}</h6>
+                    <h6 className="value">{myContributions[card.id]?.data.length}</h6>
                   </div>
                 ))}
               </div>
@@ -280,9 +108,9 @@ const Profile = ({crumbs}) => {
             <div className="card-widget-basic card-align score-container ">
               <div
                 className={`star-image ${
-                  socialScore > 300
+                  userData?.social_score > 300
                     ? "gold-badge"
-                    : 300 < socialScore > 100
+                    : 300 < userData?.social_score > 100
                     ? "silver-badge"
                     : "silver-badge"
                 }`}
@@ -290,7 +118,7 @@ const Profile = ({crumbs}) => {
               <div className="score-info card-align ">
                 <div className="card-align information">
                   <h6 className="key">Social Score</h6>
-                  <h6 className="value">{socialScore}</h6>
+                  <h6 className="value">{userData?.social_score}</h6>
                 </div>
                 <div className="card-align information">
                   <h6 className="key">REAP Points</h6>
@@ -328,7 +156,8 @@ const Profile = ({crumbs}) => {
                                   {"Delete"}
                                 </Tooltip>
                               }>
-                              <i  class="delete icon fa fa-trash"></i>
+                              <i onClick={()=>{
+                                dispatch(deleteContributionRequest(rowData.contribution_id,activeCardId))}}  class="delete icon fa fa-trash"></i>
                             </OverlayTrigger>
                             <OverlayTrigger
                               key="right"

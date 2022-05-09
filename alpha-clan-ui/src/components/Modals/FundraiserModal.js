@@ -1,29 +1,39 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import Icon from "@material-ui/core/Icon";
-import InputTags from "../TagInput/InputTags";
+import { submitContributionRequest } from "../../Actions/ProfileActions";
+import { useDispatch } from "react-redux";
 
-const FundRaiserModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
+const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData }) => {
   const [show, setShow] = useState(false);
-  const [cause, setCause] = useState();//medical emergency/demise/other
+  const [cause, setCause] = useState("medical");//medical emergency/demise/other
   const [fundsFor, setFundsFor] = useState("");//name
-  const [relation, setRelation] = useState(""); //medical(Co-worker/Family/Friend/Other)
+  const [relation, setRelation] = useState("Family"); //medical(Co-worker/Family/Friend/Other)
   const [upperLimit, setUpperLimit] = useState();
   const [summary, setSummary] = useState("");
+  const [dueDate, setDueDate] = useState();
+  const dispatch = useDispatch();
+
   const handleClose = () => {
     setShow(false);
+    setCause("medical");
+    setFundsFor("");
+    setRelation("Family");
+    setUpperLimit("");
+    setSummary("");
+    setDueDate();
+
     onHideSetIsEdit(false);
   }
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (isEdit) {
-      console.log(rowData);
       setShow(true);
       setCause(rowData.donation_category==="Medical Emergency"?"medical":"Demise"?"demise":"other");
       setRelation(rowData.relation);
-      setFundsFor(rowData.name);
+      setFundsFor(rowData.funds_for);
+      setDueDate(rowData.ends)
       setSummary(rowData.comment);
       setUpperLimit(rowData.fund_aim);   
     }
@@ -69,7 +79,7 @@ const FundRaiserModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
             <Col sm="8">
               <Form.Control
                 type="text"
-                placeholder="Collect funds for"
+                placeholder="Name"
                 value={fundsFor}
                 onChange={(e) => setFundsFor(e.target.value)}
               />
@@ -114,6 +124,22 @@ const FundRaiserModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
           
           <Form.Control.Feedback type={"invalid"}>This field is required!</Form.Control.Feedback>
         </Form.Group>
+        <Form.Group className="form-group"as={Row}>
+
+        <Form.Label column sm="4">
+              Due Date<span className="required">*</span>
+            </Form.Label>
+        <Col sm="8">
+                <Form.Control
+                  type="date"
+                  placeholder={"Start Date"}
+                  value={dueDate}
+                  onChange={({ target: { value } }) => {
+                    setDueDate(value);
+                  }}
+                />
+              </Col>
+        </Form.Group>
 <Form.Group className="form-group"as={Row}>
             <Form.Label column sm="4">
               Summary
@@ -138,9 +164,50 @@ const FundRaiserModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
             Cancel
           </Button>
           <Button
+            disabled={!(fundsFor&&relation&&upperLimit&&dueDate)}
             variant="success"
             className="button submit-button"
-            onClick={handleClose}
+            onClick={() => {
+              let tempCause = `${
+                cause === "medical" ? "Medical Emergency" :cause === "other"?"Other":"Demise" 
+              }`;
+              var today = new Date();
+              var dd = String(today.getDate()).padStart(2, "0");
+              var mm = String(today.getMonth() + 1).padStart(2, "0");
+              var yyyy = today.getFullYear();
+
+              today = `${mm}-${dd}-${yyyy}`;
+              
+              let data = {
+                cause:tempCause,
+                funds_for:fundsFor,
+                relation,
+                fund_aim:upperLimit,
+                requested_on: today,
+                comment:summary,
+                status: "Pending",
+                social_score: 10,
+                contribution_type_id: 2,
+                actions: "",
+                ends:dueDate,
+                contribution_id:Math.floor((Math.random() * 10) + 1),
+              };
+              console.log(data);
+              if (isEdit) {
+                console.log("");
+                // dispatch(
+                //   updateContributionRequest(data, contribution?.id, () => {
+                //     handleClose();
+                //   })
+              } else {
+                dispatch(
+                  submitContributionRequest(data, () => {
+                    handleClose();
+                  })
+                );
+                onSumitSetActiveCard();
+              }
+            }}
           >
             Submit
           </Button>

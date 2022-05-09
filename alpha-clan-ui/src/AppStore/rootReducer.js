@@ -1,9 +1,11 @@
 import {combineReducers} from "redux";
-import dashboardReducer from "../Reducers/DashboardReducer";
-// import {cardDetailsReducer} from "../Reducers/cardDetailsReducer";
+import {profileReducer} from "../Reducers/ProfileReducer";
+import {pahalReducer} from "../Reducers/PahalReducer";
+import {userReducer} from "../Reducers/UserReducer";
 
 const rootReducer = combineReducers({
-  dashboardData: dashboardReducer,
-//   cardDetailsReducer,
+  profileReducer,
+  pahalReducer,
+  userReducer
 });
 export default rootReducer;

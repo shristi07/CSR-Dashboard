@@ -9,14 +9,13 @@ const Breadcrumbs = ({
                        ...props
                      }) => {
 
-                    console.log("reach",breadcrumbs);
   return <>
     <div className="breadcrumbs-container">
       {
          breadcrumbs.map(({
                                                      path,
                                                      name
-                                                   }, index) => <>{console.log("test bread",path,name)}
+                                                   }, index) => <>
           <div
             // to={{pathname: path}}
             className="breadcrumb"

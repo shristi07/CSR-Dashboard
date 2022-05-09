@@ -1,29 +1,9 @@
 
 
 import React from "react";
-import {CSSTransition} from "react-transition-group";
 import {NavLink} from "react-router-dom";
-import Icon from "@material-ui/core/Icon";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
-const AppSidebar = props => {
-    const userData= {
-        "enabled": true,
-        "firstName": "Shristi",
-        "fullName": "Shristi Katiyar",
-        "hasApprovals": false,
-        "id": 1877,
-        "isAdmin": false,
-        "isReportingManager": false,
-        "lastName": "Katiyar",
-        "middleName": null,
-        "newerId": "4682",
-        "profilePicUrl": "https://success-factor.s3.amazonaws.com/prod/profilePicFolder/408b47cd-af04-448f-9bcb-eea42ab4ae49_Shristi-Katiyar-Profile-Pitcure.jpeg",
-        "reportingManagerName": "Mukund Mohan Chaturvedi",
-        "username": "shristi.katiyar@tothenew.com",
-        "vertical": null
-      }
+const AppSidebar = ({userData}) => {
     const data = [
       
           {
@@ -50,8 +30,8 @@ const AppSidebar = props => {
                 className={`sidebar-menu `}
               >
                   <div className="nav-header">
-                      <img width="48" height="48" src={userData.profilePicUrl} />
-                      <p className="user-name">{userData.fullName}</p>
+                      <img width="48" height="48" src={userData?.profilePicUrl} />
+                      <p className="user-name">{userData?.fullName}</p>
                   </div>
                <ul className="sidebar-menu-list">
                    {data.map(item=><li>

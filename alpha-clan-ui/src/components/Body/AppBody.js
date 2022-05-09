@@ -38,13 +38,12 @@ const AppBody = () => {
                               component: Component,
                               exact,
                               componentProps = {}
-                            }, key) => (console.log("test com",Component),
+                            }, key) => 
                             <Route
                     exact
                     path={path}
                     key={key}
                     render={props => {
-                      console.log("prop",props.match.path,"-",routes);
                       const crumbs = routes
                         // Get all routes that contain the current one.
                         .filter(({path}) => props.match.path.includes(path))
@@ -71,7 +70,7 @@ const AppBody = () => {
                       </>;
                     }}
                   />
-                ))
+                )
               }
             </Switch>
           </Suspense>

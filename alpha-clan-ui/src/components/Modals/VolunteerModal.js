@@ -3,12 +3,16 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icon from "@material-ui/core/Icon";
 import InputTags from "../TagInput/InputTags";
+import { useDispatch } from "react-redux";
+import { submitContributionRequest } from "../../Actions/ProfileActions";
 
-const VolunteerModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
+const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData }) => {
   const [show, setShow] = useState(false);
   const [volunteer, setVolunteer] = useState();
-  
+
+  const dispatch = useDispatch();
   const handleClose = () => {
+    setVolunteer();
     setShow(false);
     onHideSetIsEdit(false);
   }
@@ -18,7 +22,6 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
     if (isEdit) {
       setShow(true);
       setVolunteer(rowData?.volunteer_at);
-  // console.log(volunteer);
       
     }
   }, [isEdit,rowData]);
@@ -65,9 +68,40 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit, rowData }) => {
             Cancel
           </Button>
           <Button
+            disabled={true}
             variant="success"
             className="button submit-button"
-            onClick={handleClose}
+            onClick={() => {
+              var today = new Date();
+              var dd = String(today.getDate()).padStart(2, "0");
+              var mm = String(today.getMonth() + 1).padStart(2, "0");
+              var yyyy = today.getFullYear();
+
+              today = `${mm}-${dd}-${yyyy}`;
+              let data = {
+                volunteer_at:volunteer,
+                requested_on: today,
+                status: "Pending",
+                social_score: 10,
+                contribution_id:Math.floor((Math.random() * 10) + 1),
+                contribution_type_id: 1,
+                actions: "",
+              };
+              if (isEdit) {
+                console.log("");
+                // dispatch(
+                //   updateContributionRequest(data, contribution?.id, () => {
+                //     handleClose();
+                //   })
+              } else {
+                dispatch(
+                  submitContributionRequest(data, () => {
+                    handleClose();
+                  })
+                );
+                onSumitSetActiveCard();
+              }
+            }}
           >
              {isEdit?"Save":"Submit"}
           </Button>

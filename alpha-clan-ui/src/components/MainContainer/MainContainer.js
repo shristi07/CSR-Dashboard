@@ -1,4 +1,5 @@
 import React, {Suspense, useCallback, useEffect, useState} from "react";
+import { useSelector } from "react-redux";
 import AppBody from "../Body/AppBody";
 import AppFooter from "../Footer/Footer";
 import AppHeader from "../Header/AppHeader";
@@ -12,17 +13,11 @@ const MainContainer = props => {
 //   const [showResponsiveSidebar, setShowResponseSidebar] = useState(false);
 //   const [isUserTourEnabled, setIsUserTourEnabled] = useState(false);
 
-//   const {
-//     getUserInfoLoader,
-//     userInfo,
-//     getProjectDetailsLoader,
-//     sidebarExpand,
-//     forceSidebarClose,
-//     isNewUser,
-//     selectedProjectId,
-//   } = useSelector(state => ({
-//     ...state.userReducer
-//   }));
+  const {
+    userData,
+  } = useSelector(state => ({
+    ...state.userReducer
+  }));
 //   const dispatch = useDispatch();
 
 //   useEffect(
@@ -151,14 +146,14 @@ const MainContainer = props => {
         <></> : <>
           <div className="panel-container">
             <div className="left-panel">
-              <AppSidebar
+              <AppSidebar userData={userData}
               /></div>
               <div className="right-panel">
               <AppHeader
                 // handleClick={handleHamburgerToggle}
               />
 
-                <AppBody/>
+                <AppBody userData={userData}/>
                 <AppFooter
       />
               </div>

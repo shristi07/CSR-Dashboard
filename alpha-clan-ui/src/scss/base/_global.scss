@@ -70,9 +70,18 @@ body {
   background-color: $navy;
   border-color: $navy;
 }
-.submit-button:hover, .submit-button:focus{
-  background-color: #189b80;
+.submit-button:disabled{
+  background-color: $navy;
+  border-color: $navy;
+  opacity: 0.55;
+}
+.submit-button:active, .submit-button:visited, .submit-button:focus{
+  background-color: $navy;
   box-shadow: unset;
+  border: unset;
+}
+.submit-button:hover{
+  background-color: #189b80;
 }
 .cancel-button{
   color: $dark-gray;
