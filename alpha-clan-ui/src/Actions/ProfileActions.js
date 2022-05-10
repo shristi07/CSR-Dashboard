@@ -27,7 +27,7 @@ export const sendEmail = () => async dispatch => {
 }
 export const submitContributionRequest = (data, cb) => (dispatch) => {
         dispatch(requestContribution(data));
-        // dispatch(sendEmail());
+        dispatch(sendEmail());
         cb && cb();
         toast.success("Request Submitted || Social Score Earned");
   };
