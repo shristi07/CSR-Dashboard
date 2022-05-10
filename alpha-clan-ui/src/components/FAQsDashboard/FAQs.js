@@ -53,13 +53,13 @@ const FAQs = ({ crumbs }) => {
                   making contributions under PAHAL. Score is segragated
                   according to the type of contribution made as follows:
                   <br />
-                  1.Monetory Donation - 100 INR = 1 Social Score Earned
+                  1.Monetory Donation - 100 INR = 1 Social Score Points Earned
                   <br />
-                  2.Charity Donation - 5 Social Score Earned
+                  2.Charity Donation - 5 Social Score Points Earned
                   <br />
-                  3.Volunteer- 20 Social Score Earned
+                  3.Volunteer- 20 Social Score Points Earned
                   <br />
-                  4.Starting Fundraiser- 20 Social Score Earned"
+                  4.Starting Fundraiser- 20 Social Score Points Earned
                 </p>
               </li>
             </ul>

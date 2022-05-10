@@ -1,4 +1,3 @@
-
 // import config from "../config/config";
 import {handleActions} from "redux-actions";
 import {profileTypes} from "../constants";
@@ -34,42 +33,7 @@ const initState = {
      }
    ],
    "data": [
-    //  {
-    //    "donation_category": "Monetory Donation",
-    //    "donation":"300",
-    //    "requested_on": "19-04-2021",
-    //    "status": "Complete",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:1
-    //  },
-    //  {
-    //    "donation_category": "Monetory Donation",
-    //    "donation":"300",
-    //    "requested_on": "19-04-2021",
-    //    "status": "Complete",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:2
-    //  },
-    //  {
-    //    "donation_category": "Charity Donation",
-    //    "donation":[{label:"Book",value:"Book"},{ value: 'Linen/Blankets', label: 'Linen/Blankets'}],
-    //    "requested_on": "19-04-2021",
-    //    "status": "Pending",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:3
-    //  },
-    //  {
-    //    "donation_category": "Monetory Donation",
-    //    "donation":"300",
-    //    "requested_on": "19-04-2021",
-    //    "status": "Complete",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:4
-    //  }
+
    ]
  },
  {
@@ -101,39 +65,6 @@ const initState = {
      }
    ],
    "data": [
-    //  {
-    //    "volunteer_at": [{label:"Tree Plantation Drive",value:"Tree Plantation Drive"}],
-
-    //    "requested_on": "19-04-2021",
-    //    "status": "Pending",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:5
-    //  },
-    //  {
-    //    "volunteer_at": [{label:"Tree Plantation Drive",value:"Tree Plantation Drive"}],
-    //    "requested_on": "19-04-2021",
-    //    "status": "Complete",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:6
-    //  },
-    //  {
-    //    "volunteer_at": [{label:"Blanket Distribution",value:"Blanket Distribution"}],
-    //    "requested_on": "19-04-2021",
-    //    "status": "Complete",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:7
-    //  },
-    //  {
-    //    "volunteer_at": [{label:"Blanket Distribution",value:"Blanket Distribution"}],
-    //    "requested_on": "19-04-2021",
-    //    "status": "Pending",
-    //    "social_score": 20,
-    //    actions: "",
-    // contribution_id:8
-    //  }
    ]
  },
  {
@@ -177,18 +108,7 @@ const initState = {
      }
    ],
    "data": [
-    //  {
-    //    "cause": "Medical Emergency",>
-    // contribution_id:9,
-    //    "funds_for":"Vishnu",>
-    //    "relation":"Family",>
-    //    "fund_aim":30000,>
-    //    "requested_on": "19-04-2021",>
-    //    "status": "Pending",>
-    //    "social_score": 50,>
-    //    "comment":"We Lost Vishnu in a Car accident",>
-    //    "actions": ""
-    //  },
+
    ]
  }
 ],
@@ -227,21 +147,7 @@ export const profileReducer = handleActions(
       })
     },
 		[profileTypes.EDIT_REQUEST]: (state, action) => {
-        // let returnedData = [];
-        // const {id,type_id} = action.payload;
-        // let filteredObj = state.myContributions.filter(item => item.contribution_type_id === type_id);
-      
-        // let ind = filteredObj[0].data.findIndex(item => item.contribution_id === id);
-      
-        // if (ind !== -1) {
-        //   filteredObj[0].data.splice(ind, 1);
-        // }
-      
-        // returnedData = [...state.myContributions.filter(item => item.contribution_type_id !== type_id), ...filteredObj];
-      
-        // return ({...state,
-        // myContributions:[...returnedData]
-        // })
+
       },
 		[profileTypes.REQUEST_PROFILE_CARD_DATA]: (state, action) => ({
 			...state,

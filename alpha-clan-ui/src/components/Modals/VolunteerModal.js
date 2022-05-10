@@ -1,15 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 import { useDispatch } from "react-redux";
 import { submitContributionRequest } from "../../Actions/ProfileActions";
 
 const animatedComponents = makeAnimated();
 
-const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData }) => {
+const VolunteerModal = ({
+  isEdit,
+  onHideSetIsEdit,
+  onSumitSetActiveCard,
+  rowData,
+}) => {
   const [show, setShow] = useState(false);
   const [volunteer, setVolunteer] = useState([]);
   const dispatch = useDispatch();
@@ -17,16 +22,15 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
     setVolunteer([]);
     setShow(false);
     onHideSetIsEdit(false);
-  }
+  };
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (isEdit) {
       setShow(true);
       setVolunteer(rowData?.volunteer_at);
-      
     }
-  }, [isEdit,rowData]);
+  }, [isEdit, rowData]);
 
   return (
     <>
@@ -38,9 +42,16 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
         Volunteer
       </Button>
 
-      <Modal size="md" show={show} onHide={handleClose}>
+      <Modal
+        dialogClassName="modal-90w"
+        size="md"
+        show={show}
+        onHide={handleClose}
+      >
         <Modal.Header>
-          <Modal.Title>{isEdit ? "Edit Volunteer Request" : "Create Volunteer Request"}</Modal.Title>
+          <Modal.Title>
+            {isEdit ? "Edit Volunteer Request" : "Create Volunteer Request"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="form-group" as={Row}>
@@ -49,20 +60,29 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
             </Form.Label>
             <Col sm="9">
               <Select
-      closeMenuOnSelect={false}
-      components={animatedComponents}
-      isMulti
-      value={volunteer}
-      onChange={(selectedOption) => {
-        setVolunteer([...selectedOption])
-      }}
-      options={[
-        { value: "Tree Plantation Drive", label: "Tree Plantation Drive" },
-        { value: "Support Families(Pulwama Attack Martyrs)", label: "Support Families(Pulwama Attack Martyrs)" },
-        { value: "Blanket Distribution", label: "Blanket Distribution" },
-        { value: "Pyayas Vidyalaya", label: "Pyayas Vidyalaya" },
-      ]}
-    />
+                closeMenuOnSelect={true}
+                components={animatedComponents}
+                isMulti
+                value={volunteer}
+                onChange={(selectedOption) => {
+                  setVolunteer([...selectedOption]);
+                }}
+                options={[
+                  {
+                    value: "Tree Plantation Drive",
+                    label: "Tree Plantation Drive",
+                  },
+                  {
+                    value: "Support Families(Pulwama Attack Martyrs)",
+                    label: "Support Families(Pulwama Attack Martyrs)",
+                  },
+                  {
+                    value: "Blanket Distribution",
+                    label: "Blanket Distribution",
+                  },
+                  { value: "Pyayas Vidyalaya", label: "Pyayas Vidyalaya" },
+                ]}
+              />
             </Col>
           </Form.Group>
         </Modal.Body>
@@ -75,7 +95,7 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
             Cancel
           </Button>
           <Button
-            disabled={volunteer.length==0||isEdit}
+            disabled={volunteer.length == 0 || isEdit}
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -86,20 +106,16 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
 
               today = `${mm}-${dd}-${yyyy}`;
               let data = {
-                volunteer_at:volunteer,
+                volunteer_at: volunteer,
                 requested_on: today,
                 status: "Pending",
                 social_score: 5,
-                contribution_id:Math.floor((Math.random() * 10) + 1),
+                contribution_id: Math.floor(Math.random() * 10 + 1),
                 contribution_type_id: 1,
                 actions: "",
-                date:"07-05-2022"
+                date: "07-05-2022",
               };
               if (isEdit) {
-                // dispatch(
-                //   updateContributionRequest(data, contribution?.id, () => {
-                //     handleClose();
-                //   })
               } else {
                 dispatch(
                   submitContributionRequest(data, () => {
@@ -110,7 +126,7 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
               }
             }}
           >
-             {isEdit?"Save":"Submit"}
+            {isEdit ? "Save" : "Submit"}
           </Button>
         </Modal.Footer>
       </Modal>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import PropTypes from "prop-types";
 import {
   updateContributionRequest,
@@ -18,7 +18,7 @@ const DonateModal = ({
   rowData,
   fundraiser,
   star,
-  onSumitSetActiveCard
+  onSumitSetActiveCard,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -43,11 +43,9 @@ const DonateModal = ({
     if (isEdit) {
       setShow(true);
       setCategory(
-        rowData?.donation_category === "Monetory Donation"
-          ? "amount"
-          : "item"
+        rowData?.donation_category === "Monetory Donation" ? "amount" : "item"
       );
-      setFrequency(rowData?.frequency)
+      setFrequency(rowData?.frequency);
       {
         rowData?.donation_category === "Monetory Donation"
           ? setAmount(rowData?.donation)
@@ -95,7 +93,10 @@ const DonateModal = ({
                   {" "}
                   Monetory Donation{" "}
                 </option>
-                <option disabled={fundraiser} value="item"> Charity Donation </option>
+                <option disabled={fundraiser} value="item">
+                  {" "}
+                  Charity Donation{" "}
+                </option>
               </Form.Control>
             </Col>
 
@@ -103,56 +104,58 @@ const DonateModal = ({
               This field is required!
             </Form.Control.Feedback>
           </Form.Group>
-          {!fundraiser && <Form.Group className="form-group" as={Row}>
-            <Form.Label column sm="4">
-              Donate<span className="required">*</span>
-            </Form.Label>
-            <Col sm="8">
-              {category === "amount" ? (
-                <>
-                  <Form.Check
-                    inline
-                    label="Once"
-                    name="group2"
-                    type={"radio"}
-                    id={"inline-radio-1"}
-                    checked={frequency === "Once"}
-                    onChange={() => setFrequency("Once")}
+          {!fundraiser && (
+            <Form.Group className="form-group" as={Row}>
+              <Form.Label column sm="4">
+                Donate<span className="required">*</span>
+              </Form.Label>
+              <Col sm="8">
+                {category === "amount" ? (
+                  <>
+                    <Form.Check
+                      inline
+                      label="Once"
+                      name="group2"
+                      type={"radio"}
+                      id={"inline-radio-1"}
+                      checked={frequency === "Once"}
+                      onChange={() => setFrequency("Once")}
+                    />
+                    <Form.Check
+                      inline
+                      label="Monthly"
+                      type={"radio"}
+                      name="group2"
+                      id={"inline-radio-4"}
+                      checked={frequency === "Monthly"}
+                      onChange={() => setFrequency("Monthly")}
+                    />
+                  </>
+                ) : (
+                  <Select
+                    components={animatedComponents}
+                    isMulti
+                    value={donateItem}
+                    onChange={(selectedOption) =>
+                      setDonateItem([...selectedOption])
+                    }
+                    options={[
+                      { value: "Books", label: "Books" },
+                      { value: "Linen/Blankets", label: "Linen/Blankets" },
+                      { value: "Clothing", label: "Clothing" },
+                      { value: "Toys", label: "Toys" },
+                      { value: "Electronic Item", label: "Electronic Item" },
+                      { value: "Furniture", label: "Furniture" },
+                      { value: "Other", label: "Other" },
+                    ]}
                   />
-                  <Form.Check
-                    inline
-                    label="Monthly"
-                    type={"radio"}
-                    name="group2"
-                    id={"inline-radio-4"}
-                    checked={frequency === "Monthly"}
-                    onChange={() => setFrequency("Monthly")}
-                  />
-                </>
-              ) : (
-                <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                isMulti
-                value={donateItem}
-                onChange={(selectedOption) =>setDonateItem([...selectedOption])
-                }
-                options={[
-                  { value: "Books", label: "Books" },
-                  { value: "Linen/Blankets", label: "Linen/Blankets" },
-                  { value: "Clothing", label: "Clothing" },
-                  { value: "Toys", label: "Toys" },
-                  { value: "Electronic Item", label: "Electronic Item" },
-                  { value: "Furniture", label: "Furniture" },
-                  { value: "Other", label: "Other" },
-                ]}
-                />
-              )}
-            </Col>
-            <Form.Control.Feedback type={"invalid"}>
-              This field is required!
-            </Form.Control.Feedback>
-          </Form.Group>}
+                )}
+              </Col>
+              <Form.Control.Feedback type={"invalid"}>
+                This field is required!
+              </Form.Control.Feedback>
+            </Form.Group>
+          )}
 
           {category === "item" ? (
             <Form.Group className="form-group" as={Row}>
@@ -190,11 +193,10 @@ const DonateModal = ({
                   >
                     INR
                   </InputGroup.Text>
-                
                 </InputGroup>
-                <span style={{position:"unset"}} className="info">
-                *100 INR Donated = +1 Social Score
-              </span>
+                <span style={{ position: "unset" }} className="info">
+                  *100 INR Donated = +1 Social Score
+                </span>
               </Col>
 
               <Form.Control.Feedback type={"invalid"}>
@@ -216,7 +218,11 @@ const DonateModal = ({
             Cancel
           </Button>
           <Button
-            disabled={(category==="amount"?!(frequency && (donateItem || amount)):false)||isEdit}
+            disabled={
+              (category === "amount"
+                ? !(frequency && (donateItem || amount))
+                : false) || isEdit
+            }
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -235,21 +241,26 @@ const DonateModal = ({
                 frequency === "Monthly" ? frequency : ""
               }`;
               let data = {
-                donation_category:category === "amount" ? "Monetory Donation" : "Charity Donation",
-                donation: category === "item"?donateItem:amount,
+                donation_category:
+                  category === "amount"
+                    ? "Monetory Donation"
+                    : "Charity Donation",
+                donation: category === "item" ? donateItem : amount,
                 requested_on: today,
                 status: "Pending",
                 frequency,
-                social_score: category==="amount"?Math.floor(amount/100):10,
+                social_score:
+                  category === "amount" ? Math.floor(amount / 100) : 10,
                 contribution_type_id: 0,
-                contribution_id:Math.floor((Math.random() * 10) + 1),
+                contribution_id: Math.floor(Math.random() * 10 + 1),
                 actions: "",
               };
               if (isEdit) {
                 dispatch(
                   editContributionRequest(data, () => {
                     handleClose();
-                  }));
+                  })
+                );
               } else {
                 dispatch(
                   submitContributionRequest(data, () => {

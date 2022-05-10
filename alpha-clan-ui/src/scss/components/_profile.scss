@@ -37,8 +37,6 @@
             }
           }
           .profile-card:hover {
-            // background-color: $navy;
-            // color: #fff;
             cursor: pointer;
             box-shadow: $box-shadow;
           }
@@ -48,7 +46,6 @@
         width: 41%;
         height: 230px;
         .star-image {
-          // background-image: url("../../assets/images/silver-badge.png");
           width: 50%;
           height: 80%;
           background-size: contain;

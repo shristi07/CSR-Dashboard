@@ -4,10 +4,15 @@ import PropTypes from "prop-types";
 import { submitContributionRequest } from "../../Actions/ProfileActions";
 import { useDispatch } from "react-redux";
 
-const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData }) => {
+const FundRaiserModal = ({
+  isEdit,
+  onSumitSetActiveCard,
+  onHideSetIsEdit,
+  rowData,
+}) => {
   const [show, setShow] = useState(false);
-  const [cause, setCause] = useState("medical");//medical emergency/demise/other
-  const [fundsFor, setFundsFor] = useState("");//name
+  const [cause, setCause] = useState("medical"); //medical emergency/demise/other
+  const [fundsFor, setFundsFor] = useState(""); //name
   const [relation, setRelation] = useState("Family"); //medical(Co-worker/Family/Friend/Other)
   const [upperLimit, setUpperLimit] = useState();
   const [summary, setSummary] = useState("");
@@ -24,20 +29,26 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
     setDueDate();
 
     onHideSetIsEdit(false);
-  }
+  };
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (isEdit) {
       setShow(true);
-      setCause(rowData.donation_category==="Medical Emergency"?"medical":"Demise"?"demise":"other");
+      setCause(
+        rowData.donation_category === "Medical Emergency"
+          ? "medical"
+          : "Demise"
+          ? "demise"
+          : "other"
+      );
       setRelation(rowData.relation);
       setFundsFor(rowData.funds_for);
-      setDueDate(rowData.ends)
+      setDueDate(rowData.ends);
       setSummary(rowData.comment);
-      setUpperLimit(rowData.fund_aim);   
+      setUpperLimit(rowData.fund_aim);
     }
-  }, [isEdit,rowData]);
+  }, [isEdit, rowData]);
   return (
     <>
       <Button
@@ -50,13 +61,17 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
 
       <Modal size="md" show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>{isEdit ? "Edit Fund Raiser Request" : "Start A Fundraiser"}</Modal.Title>
+          <Modal.Title>
+            {isEdit ? "Edit Fund Raiser Request" : "Start A Fundraiser"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form.Group className="form-group" as={Row}>
-          <Form.Label column sm="4">Cause <span className="required">*</span></Form.Label>
-          <Col sm="8">
-          <Form.Control
+          <Form.Group className="form-group" as={Row}>
+            <Form.Label column sm="4">
+              Cause <span className="required">*</span>
+            </Form.Label>
+            <Col sm="8">
+              <Form.Control
                 as={"select"}
                 name={"cause"}
                 id={"cause"}
@@ -65,14 +80,19 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
                   setCause(value);
                 }}
               >
-                <option selected  value="medical">Medical Emergency</option>
+                <option selected value="medical">
+                  Medical Emergency
+                </option>
                 <option value="demise">Demise </option>
                 <option value="other">Other </option>
-              </Form.Control></Col>
-          
-          <Form.Control.Feedback type={"invalid"}>This field is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="form-group"as={Row}>
+              </Form.Control>
+            </Col>
+
+            <Form.Control.Feedback type={"invalid"}>
+              This field is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="form-group" as={Row}>
             <Form.Label column sm="4">
               Funds For<span className="required">*</span>
             </Form.Label>
@@ -86,9 +106,11 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
             </Col>
           </Form.Group>
           <Form.Group className="form-group" as={Row}>
-          <Form.Label column sm="4">Relation <span className="required">*</span></Form.Label>
-          <Col sm="8">
-          <Form.Control
+            <Form.Label column sm="4">
+              Relation <span className="required">*</span>
+            </Form.Label>
+            <Col sm="8">
+              <Form.Control
                 as={"select"}
                 name={"relation"}
                 id={"relation"}
@@ -97,50 +119,63 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
                   setRelation(value);
                 }}
               >
-                <option selected  value="Family">Family</option>
+                <option selected value="Family">
+                  Family
+                </option>
                 <option value="Co-Worker">Co-Worker </option>
                 <option value="Friend">Friend </option>
                 <option value="Other">Other </option>
-              </Form.Control></Col>
-          
-          <Form.Control.Feedback type={"invalid"}>This field is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="form-group" as={Row}>
-          <Form.Label column sm="4">Funds <span className="required">*</span></Form.Label>
-          <Col sm="8">
-          <InputGroup>
-          <Form.Control
-            id={"upperLimit"}
-            name={"upperLimit"}
-            type={"number"}
-            value={upperLimit}
-            placeholder={"Amount to be collected"}
-            onChange={({target: {value}}) => {
-              setUpperLimit(value);
-            }}
-          />
-    <InputGroup.Text style={{marginLeft:"-1px",padding:"2px 5px"}}>INR</InputGroup.Text>
-  </InputGroup></Col>
-          
-          <Form.Control.Feedback type={"invalid"}>This field is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="form-group"as={Row}>
+              </Form.Control>
+            </Col>
 
-        <Form.Label column sm="4">
-              Due Date<span className="required">*</span>
+            <Form.Control.Feedback type={"invalid"}>
+              This field is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="form-group" as={Row}>
+            <Form.Label column sm="4">
+              Funds Required <span className="required">*</span>
             </Form.Label>
-        <Col sm="8">
+            <Col sm="8">
+              <InputGroup>
                 <Form.Control
-                  type="date"
-                  placeholder={"Start Date"}
-                  value={dueDate}
+                  id={"upperLimit"}
+                  name={"upperLimit"}
+                  type={"number"}
+                  value={upperLimit}
+                  placeholder={"Amount to be collected"}
                   onChange={({ target: { value } }) => {
-                    setDueDate(value);
+                    setUpperLimit(value);
                   }}
                 />
-              </Col>
-        </Form.Group>
-<Form.Group className="form-group"as={Row}>
+                <InputGroup.Text
+                  style={{ marginLeft: "-1px", padding: "2px 5px" }}
+                >
+                  INR
+                </InputGroup.Text>
+              </InputGroup>
+            </Col>
+
+            <Form.Control.Feedback type={"invalid"}>
+              This field is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="form-group" as={Row}>
+            <Form.Label column sm="4">
+              Due Date<span className="required">*</span>
+            </Form.Label>
+            <Col sm="8">
+              <Form.Control
+                type="date"
+                placeholder={"Start Date"}
+                value={dueDate}
+                onChange={({ target: { value } }) => {
+                  setDueDate(value);
+                }}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group className="form-group" as={Row}>
             <Form.Label column sm="4">
               Summary
             </Form.Label>
@@ -153,7 +188,6 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
               />
             </Col>
           </Form.Group>
-         
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -164,12 +198,18 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
             Cancel
           </Button>
           <Button
-            disabled={(!(fundsFor&&relation&&upperLimit&&dueDate) || isEdit)}
+            disabled={
+              !(fundsFor && relation && upperLimit && dueDate) || isEdit
+            }
             variant="success"
             className="button submit-button"
             onClick={() => {
               let tempCause = `${
-                cause === "medical" ? "Medical Emergency" :cause === "other"?"Other":"Demise" 
+                cause === "medical"
+                  ? "Medical Emergency"
+                  : cause === "other"
+                  ? "Other"
+                  : "Demise"
               }`;
               var today = new Date();
               var dd = String(today.getDate()).padStart(2, "0");
@@ -177,28 +217,23 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
               var yyyy = today.getFullYear();
 
               today = `${mm}-${dd}-${yyyy}`;
-              
+
               let data = {
-                cause:tempCause,
-                funds_for:fundsFor,
+                cause: tempCause,
+                funds_for: fundsFor,
                 relation,
-                fund_aim:upperLimit,
+                fund_aim: upperLimit,
                 requested_on: today,
-                comment:summary,
+                comment: summary,
                 status: "Pending",
                 social_score: 10,
                 contribution_type_id: 2,
                 actions: "",
-                ends:dueDate,
-                contribution_id:Math.floor((Math.random() * 10) + 1),
+                ends: dueDate,
+                contribution_id: Math.floor(Math.random() * 10 + 1),
               };
-              
+
               if (isEdit) {
-               
-                // dispatch(
-                //   updateContributionRequest(data, contribution?.id, () => {
-                //     handleClose();
-                //   })
               } else {
                 dispatch(
                   submitContributionRequest(data, () => {
@@ -225,6 +260,5 @@ FundRaiserModal.propTypes = {
 FundRaiserModal.defaultProps = {
   isEdit: false,
 };
-
 
 export default FundRaiserModal;

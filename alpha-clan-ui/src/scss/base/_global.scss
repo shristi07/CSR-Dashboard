@@ -145,23 +145,8 @@ i{
 
 }
 
-.panel-container1 {
-  display: none;
-  width: 0%;
-  height: 100%;
-  .left-panel {
-    display: none;
-    width: 0px;
-  }
-  .right-panel{
-      background-color: #f3f3f4;
-      height: 100%;
-      width: 100%;
-      overflow-y: auto;
-      position: relative;
-      
-  }
-
+.global-container{
+  min-height: 84%;
 }
 .card-align{
   display: flex;

@@ -1,5 +1,4 @@
 
-// import config from "../config/config";
 import {handleActions} from "redux-actions";
 import {userDataTypes} from "../constants";
 

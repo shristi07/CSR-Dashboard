@@ -1,6 +1,4 @@
 import React from "react";
-// import FooterLogo from "../../assets/images/footer-logo.png";
-
 
 function AppFooter() {
 	return (

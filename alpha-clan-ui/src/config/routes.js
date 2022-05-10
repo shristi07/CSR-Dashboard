@@ -1,37 +1,37 @@
 import React from "react";
 import lazyComponentLoader from "../helper/lazyComponentLoader";
 
-
-const Profile = React.lazy(() => lazyComponentLoader(() => import ("../components/ProfileDashboard/Profile")));
-const Pahal = React.lazy(() => lazyComponentLoader(() => import ("../components/PahalDashboard/Pahal")));
-const FAQs = React.lazy(() => lazyComponentLoader(() => import ("../components/FAQsDashboard/FAQs")));
-
-//Dashboard routes has been changed to home but the file name, scss file name, action and reducer remains ths same.
-// Metrics component's route has been renamed to dashbaord but other file remains the same.
-// Please don't get confuse with the name everything remains the same, only route's name has been changed.
+const Profile = React.lazy(() =>
+  lazyComponentLoader(() => import("../components/ProfileDashboard/Profile"))
+);
+const Pahal = React.lazy(() =>
+  lazyComponentLoader(() => import("../components/PahalDashboard/Pahal"))
+);
+const FAQs = React.lazy(() =>
+  lazyComponentLoader(() => import("../components/FAQsDashboard/FAQs"))
+);
 
 export default [
   {
     exact: true,
     path: "/",
     component: Profile,
-    name: "Home"
+    name: "Home",
   },
   {
     exact: true,
     path: "/profile",
     component: Profile,
-    name: "Profile"
+    name: "Profile",
   },
   {
     path: "/pahal",
     component: Pahal,
-    name: "Pahal"
+    name: "Pahal",
   },
   {
     path: "/FAQs",
     component: FAQs,
-    name: "FAQs"
+    name: "FAQs",
   },
- 
-]
+];

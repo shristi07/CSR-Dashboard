@@ -17,10 +17,6 @@ class landingPage extends Component {
         cookiePolicy={"none"}
         className={"btn"}
         icon={false}
-        // style={{    background: "#008080",
-        //   minWidth: "300px",
-        //   padding: "20px",
-        //   color: "#fff",}}
       />
     </div>
         </div>
