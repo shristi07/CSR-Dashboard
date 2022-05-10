@@ -8,7 +8,7 @@ const initState = {
     "enabled": true,
     "firstName": "Shristi",
     "fullName": "Shristi Katiyar",
-    "social_score":130,
+    "social_score":530,
     "hasApprovals": false,
     "id": 1877,
     "isAdmin": false,
@@ -25,7 +25,9 @@ profileCard:[
  { key: "Donations Made", value: "4", id: 0 },
  { key: "Volunteered", value: "4", id: 1 },
  { key: "Fundraiser Initiated", value: "1", id: 2 },
-]
+],
+faqData:[],
+showSidebar:true
 };
 
 export const userReducer = handleActions(
@@ -33,6 +35,10 @@ export const userReducer = handleActions(
 		[userDataTypes.REQUEST_USER_DATA]: (state, action) => ({
 			...state,
 			userData: initState.userData
+		}),
+		[userDataTypes.TOGGLE_SIDEBAR_STATE]: (state, action) => ({
+			...state,
+			showSidebar: action.payload
 		}),
 		[userDataTypes.REQUEST_PROFILE_CARD_DATA]: (state, action) => ({
 			...state,

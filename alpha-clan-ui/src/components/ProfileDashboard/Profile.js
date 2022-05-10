@@ -27,7 +27,7 @@ const Profile = ({crumbs}) => {
     userData: state.userReducer.userData,
   }));
 
-  // console.log(myContributions);
+
   
   const onEditClick = useCallback(
     (selectedRows) => {
@@ -91,9 +91,10 @@ const Profile = ({crumbs}) => {
                 {profileCard.map((card, index) => ( 
 
                   <div
-                    onClick={() => setActiveCardId(card.id)}
+                    onClick={() =>
+                      setActiveCardId(card.id)}
                     style={
-                      index === activeCardId
+                      card.id === activeCardId
                         ? { backgroundColor: "#1AB394", color: "#fff" }
                         : {}
                     }
@@ -157,7 +158,7 @@ const Profile = ({crumbs}) => {
                                 </Tooltip>
                               }>
                               <i onClick={()=>{
-                                dispatch(deleteContributionRequest(rowData.contribution_id,activeCardId))}}  class="delete icon fa fa-trash"></i>
+                                dispatch(deleteContributionRequest(rowData))}}  class="delete icon fa fa-trash"></i>
                             </OverlayTrigger>
                             <OverlayTrigger
                               key="right"

@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import PropTypes from "prop-types";
 import {
   updateContributionRequest,
   submitContributionRequest,
   test,
+  editContributionRequest,
 } from "../../Actions/ProfileActions";
-import InputTags from "../TagInput/InputTags";
 import { useDispatch } from "react-redux";
+const animatedComponents = makeAnimated();
 
 const DonateModal = ({
   isEdit,
@@ -22,7 +25,7 @@ const DonateModal = ({
   const [category, setCategory] = useState("amount");
   const [frequency, setFrequency] = useState();
   const [amount, setAmount] = useState("");
-  const [donateItem, setDonateItem] = useState();
+  const [donateItem, setDonateItem] = useState([]);
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
@@ -31,7 +34,7 @@ const DonateModal = ({
     setCategory("amount");
     setFrequency();
     setAmount("");
-    setDonateItem();
+    setDonateItem([]);
     setComment("");
     onHideSetIsEdit(false);
   };
@@ -48,14 +51,14 @@ const DonateModal = ({
       {
         rowData?.donation_category === "Monetory Donation"
           ? setAmount(rowData?.donation)
-          : setDonateItem(rowData?.donation.split(","));
+          : setDonateItem(rowData?.donation);
       }
       setComment(rowData?.comment);
     } else if (fundraiser) {
       setCategory("amount");
-      setFrequency("Once");
     }
   }, [isEdit, rowData]);
+
   return (
     <>
       <Button
@@ -92,7 +95,7 @@ const DonateModal = ({
                   {" "}
                   Monetory Donation{" "}
                 </option>
-                <option value="item"> Charity Donation </option>
+                <option disabled={fundraiser} value="item"> Charity Donation </option>
               </Form.Control>
             </Col>
 
@@ -100,7 +103,7 @@ const DonateModal = ({
               This field is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="form-group" as={Row}>
+          {!fundraiser && <Form.Group className="form-group" as={Row}>
             <Form.Label column sm="4">
               Donate<span className="required">*</span>
             </Form.Label>
@@ -127,31 +130,29 @@ const DonateModal = ({
                   />
                 </>
               ) : (
-                <InputTags
-                  defaultValue={donateItem}
-                  onChange={setDonateItem}
-                  styles={{
-                    control: (styles) => ({
-                      ...styles,
-                      backgroundColor: "#23c6c8",
-                    }),
-                  }}
-                  data={[
-                    { value: "Books", label: "Books" },
-                    { value: "Linen/Blankets", label: "Linen/Blankets" },
-                    { value: "Clothing", label: "Clothing" },
-                    { value: "Toys", label: "Toys" },
-                    { value: "Electronic Item", label: "Electronic Item" },
-                    { value: "Furniture", label: "Furniture" },
-                    { value: "Other", label: "Other" },
-                  ]}
+                <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                value={donateItem}
+                onChange={(selectedOption) =>setDonateItem([...selectedOption])
+                }
+                options={[
+                  { value: "Books", label: "Books" },
+                  { value: "Linen/Blankets", label: "Linen/Blankets" },
+                  { value: "Clothing", label: "Clothing" },
+                  { value: "Toys", label: "Toys" },
+                  { value: "Electronic Item", label: "Electronic Item" },
+                  { value: "Furniture", label: "Furniture" },
+                  { value: "Other", label: "Other" },
+                ]}
                 />
               )}
             </Col>
             <Form.Control.Feedback type={"invalid"}>
               This field is required!
             </Form.Control.Feedback>
-          </Form.Group>
+          </Form.Group>}
 
           {category === "item" ? (
             <Form.Group className="form-group" as={Row}>
@@ -189,7 +190,11 @@ const DonateModal = ({
                   >
                     INR
                   </InputGroup.Text>
+                
                 </InputGroup>
+                <span style={{position:"unset"}} className="info">
+                *100 INR Donated = +1 Social Score
+              </span>
               </Col>
 
               <Form.Control.Feedback type={"invalid"}>
@@ -211,7 +216,7 @@ const DonateModal = ({
             Cancel
           </Button>
           <Button
-            disabled={category==="amount"?!(frequency && (donateItem || amount)):false}
+            disabled={(category==="amount"?!(frequency && (donateItem || amount)):false)||isEdit}
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -230,22 +235,21 @@ const DonateModal = ({
                 frequency === "Monthly" ? frequency : ""
               }`;
               let data = {
-                donation_category: tempCategory,
-                donation: tempDonation,
+                donation_category:category === "amount" ? "Monetory Donation" : "Charity Donation",
+                donation: category === "item"?donateItem:amount,
                 requested_on: today,
                 status: "Pending",
                 frequency,
-                social_score: 10,
+                social_score: category==="amount"?Math.floor(amount/100):10,
                 contribution_type_id: 0,
                 contribution_id:Math.floor((Math.random() * 10) + 1),
                 actions: "",
               };
               if (isEdit) {
-                console.log("");
-                // dispatch(
-                //   updateContributionRequest(data, contribution?.id, () => {
-                //     handleClose();
-                //   })
+                dispatch(
+                  editContributionRequest(data, () => {
+                    handleClose();
+                  }));
               } else {
                 dispatch(
                   submitContributionRequest(data, () => {

@@ -8,12 +8,12 @@ const AppSidebar = ({ userData, style }) => {
 
     {
       name: "My Profile",
-      icon: "analytics",
+      icon: "fa-user",
       link: "/profile",
     },
     {
       name: "Pahal",
-      icon: "analytics",
+      icon: "fa-gift",
       link: "/pahal",
     },
     {
@@ -24,13 +24,12 @@ const AppSidebar = ({ userData, style }) => {
   ]
 
   return <>
-    <div className={style}>
-      <div className={`left-panel sidebar-menu-container `}>
+      <div className={`sidebar-menu-container `}>
         <div
           className={`sidebar-menu `}
         >
           <div className="nav-header">
-            <img width="48" height="48" src={userData?.profilePicUrl} />
+            <img width="50" height="50" src={userData?.profilePicUrl} />
             <p className="user-name">{userData?.fullName}</p>
           </div>
           <ul className="sidebar-menu-list">
@@ -42,15 +41,15 @@ const AppSidebar = ({ userData, style }) => {
                 }}
                 exact={true}
                 activeClassName={"active"}
-                style={{ position: "relative" }}
+                className={"menu"}
+                
               >
-                <span >{item.name}</span>
+                   <i class={`icon fa ${item.icon}`}></i><span>{item.name}</span>
               </NavLink>
             </li>)}
           </ul>
         </div>
       </div>
-    </div>
   </>
 }
 

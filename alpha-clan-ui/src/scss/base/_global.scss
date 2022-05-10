@@ -126,8 +126,13 @@ i{
     width: 100%;
     height: 100%;
     .left-panel {
-      width: 220px;
-      background-color: #354558;
+      width: 256px;
+      background-color: #2f4050;
+      transition: width 500ms;
+      &.collapse{
+        width: 0px;
+        display: unset;
+      }
     }
     .right-panel{
         background-color: #f3f3f4;

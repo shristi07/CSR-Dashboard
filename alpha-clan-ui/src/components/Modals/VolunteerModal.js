@@ -1,18 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import Icon from "@material-ui/core/Icon";
-import InputTags from "../TagInput/InputTags";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 import { useDispatch } from "react-redux";
 import { submitContributionRequest } from "../../Actions/ProfileActions";
 
+const animatedComponents = makeAnimated();
+
 const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData }) => {
   const [show, setShow] = useState(false);
-  const [volunteer, setVolunteer] = useState();
-
+  const [volunteer, setVolunteer] = useState([]);
   const dispatch = useDispatch();
   const handleClose = () => {
-    setVolunteer();
+    setVolunteer([]);
     setShow(false);
     onHideSetIsEdit(false);
   }
@@ -46,16 +48,21 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
               Volunteer<span className="required">*</span>
             </Form.Label>
             <Col sm="9">
-              <InputTags
-                defaultValue={volunteer}
-                onChange={setVolunteer}
-                data={[
-                  { value: "Tree Plantation Drive", label: "Tree Plantation Drive" },
-                  { value: "Support Families(Pulwama Attack Martyrs)", label: "Support Families(Pulwama Attack Martyrs)" },
-                  { value: "Blanket Distribution", label: "Blanket Distribution" },
-                  { value: "Pyayas Vidyalaya", label: "Pyayas Vidyalaya" },
-                ]}
-              />
+              <Select
+      closeMenuOnSelect={false}
+      components={animatedComponents}
+      isMulti
+      value={volunteer}
+      onChange={(selectedOption) => {
+        setVolunteer([...selectedOption])
+      }}
+      options={[
+        { value: "Tree Plantation Drive", label: "Tree Plantation Drive" },
+        { value: "Support Families(Pulwama Attack Martyrs)", label: "Support Families(Pulwama Attack Martyrs)" },
+        { value: "Blanket Distribution", label: "Blanket Distribution" },
+        { value: "Pyayas Vidyalaya", label: "Pyayas Vidyalaya" },
+      ]}
+    />
             </Col>
           </Form.Group>
         </Modal.Body>
@@ -68,7 +75,7 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
             Cancel
           </Button>
           <Button
-            disabled={true}
+            disabled={volunteer.length==0||isEdit}
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -86,9 +93,9 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
                 contribution_id:Math.floor((Math.random() * 10) + 1),
                 contribution_type_id: 1,
                 actions: "",
+                date:"07-05-2022"
               };
               if (isEdit) {
-                console.log("");
                 // dispatch(
                 //   updateContributionRequest(data, contribution?.id, () => {
                 //     handleClose();

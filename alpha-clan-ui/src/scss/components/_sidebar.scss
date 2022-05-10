@@ -3,12 +3,14 @@
     .nav-header {
       img {
         border-radius: 50%;
-        margin-left: 28px;
-        margin-top: 38px;
+        margin-left: 25px;
+        margin-top: 33px;
       }
       .user-name {
-        color: #8095a8;
-        margin-left: 28px;
+        color: #DFE4ED;
+        margin-left: 25px;
+        font-size: 14px;
+        margin-top: 5px;
       }
       height: 156px;
       background: url("../../assets/images/patterns/header-profile.png")
@@ -21,10 +23,18 @@
       text-decoration: none;
       list-style: none;
       padding: 0;
+      a{
+        height: 50px;
+        display: flex;
+        column-gap: 7px;
+        padding: 14px 20px;
+        color: #a7b1c2;
+
+      }
       a.active {
+        color: #fff;
         border-left: 4px solid #19aa8d;
         background: #293846;
-        display: block;
       }
 
       // a.active:before {
@@ -37,13 +47,11 @@
       //   position: absolute;
       // }
       span {
-        position: relative;
-        display: block;
+        // position: relative;
+        // display: block;
         font-weight: 600;
-        padding: 14px 20px 14px 25px;
-        background-color: transparent;
-        color: #a4afbd;
-        width: 100%;
+        // padding: 14px 20px 14px 25px;
+        // background-color: trans
       }
     }
   }

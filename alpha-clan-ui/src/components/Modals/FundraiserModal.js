@@ -114,7 +114,7 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
             name={"upperLimit"}
             type={"number"}
             value={upperLimit}
-            placeholder={""}
+            placeholder={"Amount to be collected"}
             onChange={({target: {value}}) => {
               setUpperLimit(value);
             }}
@@ -164,7 +164,7 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
             Cancel
           </Button>
           <Button
-            disabled={!(fundsFor&&relation&&upperLimit&&dueDate)}
+            disabled={(!(fundsFor&&relation&&upperLimit&&dueDate) || isEdit)}
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -192,9 +192,9 @@ const FundRaiserModal = ({ isEdit,onSumitSetActiveCard, onHideSetIsEdit, rowData
                 ends:dueDate,
                 contribution_id:Math.floor((Math.random() * 10) + 1),
               };
-              console.log(data);
+              
               if (isEdit) {
-                console.log("");
+               
                 // dispatch(
                 //   updateContributionRequest(data, contribution?.id, () => {
                 //     handleClose();

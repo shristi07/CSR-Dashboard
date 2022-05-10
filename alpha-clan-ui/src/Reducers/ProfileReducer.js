@@ -80,6 +80,10 @@ const initState = {
        "accessor": "volunteer_at"
      },
      {
+       "Header": "date",
+       "accessor": "date"
+     },
+     {
        "Header": "Requested On",
        "accessor": "requested_on"
      },
@@ -189,10 +193,12 @@ const initState = {
  }
 ],
 
+
+
 profileCard:[
- { key: "Donations Made", id: 0 },
- { key: "Volunteered", id: 1 },
- { key: "Fundraiser Initiated", id: 2 },
+ { key: "Donations", id: 0 },
+ { key: "Volunteer", id: 1 },
+ { key: "Fundraiser", id: 2 },
 ]
 };
 
@@ -203,15 +209,40 @@ export const profileReducer = handleActions(
 			myContributions: [
         ...state.myContributions.map(item=>item.contribution_type_id === action.payload.contribution_type_id?{...item,data:[...item.data,action.payload]}:item)]
 		}),
-		[profileTypes.DELETE_REQUESTEQUEST]: (state, action) => ({
-      ...state,
-      myContributions: {
-        ...state.myContributions.map(item=>item.contribution_type_id === action.payload.contributionTypeId?{...item,data:[item.data.filter(ele => ele.contribution_id !== action.payload.contributionId)]}:item)
-        // data: state.myContributions.data.filter(checklist => checklist.id !== action.payload)
+		[profileTypes.DELETE_REQUEST]: (state, action) => {
+      let returnedData = [];
+      console.log("action.payload",state.myContributions);
+      let filteredObj = state.myContributions.filter(item => item.contribution_type_id === action.payload.contribution_type_id);
+    
+      let ind = filteredObj[0].data.findIndex(item => item.contribution_id === action.payload.contribution_id);
+    
+      if (ind !== -1) {
+        filteredObj[0].data.splice(ind, 1);
       }
+    
+      returnedData = [...state.myContributions.filter(item => item.contribution_type_id !== action.payload.contribution_type_id), ...filteredObj];
+    console.log("return",returnedData);
+      return ({...state,
+      myContributions:[...returnedData]
+      })
+    },
+		[profileTypes.EDIT_REQUEST]: (state, action) => {
+        // let returnedData = [];
+        // const {id,type_id} = action.payload;
+        // let filteredObj = state.myContributions.filter(item => item.contribution_type_id === type_id);
       
-      // state.myContributions[action.payload.contributionTypeId].data.filter(item => item.contribution_id !== action.payload.contributionId)
-		}),
+        // let ind = filteredObj[0].data.findIndex(item => item.contribution_id === id);
+      
+        // if (ind !== -1) {
+        //   filteredObj[0].data.splice(ind, 1);
+        // }
+      
+        // returnedData = [...state.myContributions.filter(item => item.contribution_type_id !== type_id), ...filteredObj];
+      
+        // return ({...state,
+        // myContributions:[...returnedData]
+        // })
+      },
 		[profileTypes.REQUEST_PROFILE_CARD_DATA]: (state, action) => ({
 			...state,
 			profileCard: initState.profileCard

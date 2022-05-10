@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { sendEmail } from "../../Actions/ProfileActions";
 import Breadcrumbs from "../../config/Breadcrumbs";
 import DonateModal from "../Modals/DonateModal";
 
@@ -15,6 +17,7 @@ const Pahal = ({ crumbs }) => {
     // newerData: state.userReducer.newerData,
   }));
 
+const dispatch=  useDispatch();
   return (
     <>
       <div className="Pahal-container">
@@ -41,7 +44,7 @@ const Pahal = ({ crumbs }) => {
                     <span>@{event?.contact?.name}</span>
                     </a>
                   </div>
-                  <Button className="button submit-button" variant="success" >
+                  <Button onClick={()=>{dispatch(sendEmail())}} className="button submit-button" variant="success" >
           Volunteer 
          <i class="star fa fa-star"></i>
 
@@ -65,7 +68,7 @@ const Pahal = ({ crumbs }) => {
                     <span>@{drive?.contact?.name}</span>
                     </a>
                   </div>
-                  <DonateModal star={true} />
+                  <DonateModal  star={true} />
                 </div>
               ))}
             </div>
@@ -89,7 +92,7 @@ const Pahal = ({ crumbs }) => {
                     <span>@{fundraiser?.contact?.name}</span>
                     </a>
                   </div>
-                  <DonateModal star={true} fundraiser={true}/>
+                  <DonateModal  star={true} fundraiser={true}/>
                 </div>
               ))}
             </div>

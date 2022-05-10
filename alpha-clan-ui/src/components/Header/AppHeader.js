@@ -2,20 +2,20 @@
 
 import React from "react";
 import { useState } from "react";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import { sidebarState } from "../../Actions/userActions";
+
 const AppHeader = props => {
-  // const [style, setStyle] = useState("left-panel");
-  const changeStyle = () => {
-    console.log("you just clicked");
-  
-  if (props.style === "panel-container1") props.setStyle("panel-container");
-      else props.setStyle("panel-container1");
-  };
+  const{
+    showSidebar
+  }=useSelector((state) => ({
+    showSidebar:state.userReducer.showSidebar,
+  }));
+  const dispatch= useDispatch();
   return <>
     <nav class="  border-bottom card-align app-header-container">
-        <div class="hamburger-icon">
-          <i class="fa fa-bars" onClick={changeStyle}></i>
+        <div onClick={()=>dispatch(sidebarState(!showSidebar))} class="hamburger-icon">
+          <i class="fa fa-bars"></i>
         </div>
         <div class="logout-icon">
                 <a href="" >

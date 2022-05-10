@@ -1,10 +1,12 @@
 .faqs-container {
   background-color: white;
   margin: 20px;
+  padding-bottom: 20px;
+
   h2 {
     text-align: center;
     position: relative;
-    top: 35px;
+    top: 15px;
     display: table;
     justify-content: center;
     margin: 0 auto;
@@ -13,10 +15,10 @@
   }
   .faqs-container-inner {
     box-shadow: 0px 0px 9px 2px #eeeeee;
-    margin: 20px;
-    padding: 25px 0 0px;
+    margin: 0 20px;
+    // padding: 25px 0 0px;
     box-sizing: border-box;
-    height: 300px;
+    height: 450px;
     overflow-y: auto;
     // ::-webkit-scrollbar-track
     // {

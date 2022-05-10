@@ -13,7 +13,7 @@ const FAQs = ({ crumbs }) => {
             </div>
 
             <div className="faqs-container">
-                <h2>Pahal Dashboard</h2>
+                <h2>Pahal</h2>
                 <div className="faqs-container-inner">
 
                     <div className="question-container">
