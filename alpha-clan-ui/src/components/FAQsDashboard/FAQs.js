@@ -55,11 +55,11 @@ const FAQs = ({ crumbs }) => {
                   <br />
                   1.Monetory Donation - 100 INR = 1 Social Score Earned
                   <br />
-                  2.Charity Donation - ___ Social Score Earned
+                  2.Charity Donation - 5 Social Score Earned
                   <br />
-                  3.Volunteer- __ Social Score Earned
+                  3.Volunteer- 20 Social Score Earned
                   <br />
-                  4.Starting Fundraiser-__Social Score Earned"
+                  4.Starting Fundraiser- 20 Social Score Earned"
                 </p>
               </li>
             </ul>

@@ -89,7 +89,7 @@ const VolunteerModal = ({ isEdit, onHideSetIsEdit,onSumitSetActiveCard, rowData 
                 volunteer_at:volunteer,
                 requested_on: today,
                 status: "Pending",
-                social_score: 10,
+                social_score: 5,
                 contribution_id:Math.floor((Math.random() * 10) + 1),
                 contribution_type_id: 1,
                 actions: "",
