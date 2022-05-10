@@ -16,6 +16,11 @@ const AppSidebar = ({ userData, style }) => {
       icon: "analytics",
       link: "/pahal",
     },
+    {
+      name: "? FAQs",
+      icon: "analytics",
+      link: "/FAQs",
+    },
   ]
 
   return <>
