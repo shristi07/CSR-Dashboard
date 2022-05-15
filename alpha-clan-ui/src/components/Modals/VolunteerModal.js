@@ -83,7 +83,11 @@ const VolunteerModal = ({
                   { value: "Pyayas Vidyalaya", label: "Pyayas Vidyalaya" },
                 ]}
               />
+              <span style={{position:"relative",float:"right"}}>
+                *Ongoing Initiatives under Pahal
+              </span>
             </Col>
+            
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -95,7 +99,7 @@ const VolunteerModal = ({
             Cancel
           </Button>
           <Button
-            disabled={volunteer.length == 0 || isEdit}
+            disabled={volunteer.length == 0}
             variant="success"
             className="button submit-button"
             onClick={() => {
@@ -109,7 +113,7 @@ const VolunteerModal = ({
                 volunteer_at: volunteer,
                 requested_on: today,
                 status: "Pending",
-                social_score: 5,
+                social_score: 100,
                 contribution_id: Math.floor(Math.random() * 10 + 1),
                 contribution_type_id: 1,
                 actions: "",

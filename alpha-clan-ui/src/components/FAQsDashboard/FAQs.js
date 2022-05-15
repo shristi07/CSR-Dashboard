@@ -12,31 +12,30 @@ const FAQs = ({ crumbs }) => {
       </div>
 
       <div className="faqs-container">
-        <h2>Pahal</h2>
+        <h2>Kartavya</h2>
         <div className="faqs-container-inner">
           <div className="question-container">
             <ul>
               <li>
-                <span>
-                  What actions can I perform through the Pahal Dashboard?
-                </span>
+                <span>What actions can I perform through Kartavya?</span>
               </li>
               <li>
                 <p>
-                  The Pahal Dashboard is a platform for marking your
-                  contributions under TTN's CSR initiave. You can contribute in
-                  the following forms:
+                  Kartavya is a platform for marking your contributions under
+                  organisation's CSR initiave.It will enable all Employees to be more
+                  forthcoming towards their Social Responsibilities, towards
+                  their "KARTAVYA". You can contribute in the following forms:
                   <br />
                   <br />
-                  1. Donations: Newers can contribute either Monetory(any
+                  1. Donations: Employees can contribute either Monetory(any
                   amount) or Charity(any item) for our social engagements.
                   <br />
-                  2. Volunteer: Newers can join hands with the PAHAL core team
+                  2. Volunteer: Employees can join hands with the PAHAL core team
                   to help in the ongoing CSR events.
                   <br />
-                  3. Start Fundraiser: Newers can request a fundraiser which on
-                  approval can get featured on the dashboard so that nore and
-                  more newers can contribute to your cause.
+                  3. Start Fundraiser: Employees can request a fundraiser which on
+                  approval can get featured on the dashboard so that more and
+                  more Employees can contribute to your cause.
                   <br />
                 </p>
               </li>
@@ -45,21 +44,22 @@ const FAQs = ({ crumbs }) => {
           <div className="question-container">
             <ul>
               <li>
-                <span>What is social score and how it is calculated?</span>
+                <span>What is a Social Badge and Social Score?</span>
               </li>
               <li>
                 <p>
-                  Social score is similar to REAP points gained specifically on
-                  making contributions under PAHAL. Score is segragated
-                  according to the type of contribution made as follows:
+                  Social badge is a visible and validated indicator of active
+                  participation of a Employee under PAHAL whereas Social Score
+                  is a point that a Employee earns with
+                  every contribution made through this Dashboard in the following manner:
                   <br />
-                  1.Monetory Donation - 100 INR = 1 Social Score Points Earned
+                  1.Monetory Donation - 100 INR = 5 Social Score Points Earned
                   <br />
-                  2.Charity Donation - 5 Social Score Points Earned
+                  2.Charity Donation - 50 Social Score Points Earned
                   <br />
-                  3.Volunteer- 20 Social Score Points Earned
+                  3.Volunteer- 100 Social Score Points Earned
                   <br />
-                  4.Starting Fundraiser- 20 Social Score Points Earned
+                  4.Starting Fundraiser- 50 Social Score Points Earned
                 </p>
               </li>
             </ul>
@@ -68,12 +68,19 @@ const FAQs = ({ crumbs }) => {
           <div className="question-container">
             <ul>
               <li>
-                <span>How reap is related to social core?</span>
+                <span>How Social Badge is related to Social Score?</span>
               </li>
               <li>
                 <p>
-                  The social score will be added to REAP point that can be
-                  redeemed from newersworld.
+                Social Badges are segragated according to the Employee's Social Score in the following manner:
+                  <br />
+                  1. Social Score &gt; 5000 - Gold Badge
+                  <br />
+                  2.Social Score &gt; 1000 - Silver Badge
+                  <br />
+                  3.Social Score &gt; 0 - Bronze Badge
+                  <br />
+                  Employees who manage to earn Gold Badge with their exceptional work will be recognised under Leaders Board
                 </p>
               </li>
             </ul>
@@ -85,7 +92,7 @@ const FAQs = ({ crumbs }) => {
               </li>
               <li>
                 <p>
-                  Every 18th of a month, donation request made by Newer will get
+                  Every 18th of a month, donation request made by Employee will get
                   resolved as on 18th Financial team initiates the calculation
                   for the salary to be credited for current month.
                 </p>

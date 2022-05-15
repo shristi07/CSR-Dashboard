@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import {
   updateContributionRequest,
   submitContributionRequest,
-  test,
-  editContributionRequest,
 } from "../../Actions/ProfileActions";
 import { useDispatch } from "react-redux";
 const animatedComponents = makeAnimated();
@@ -17,6 +15,7 @@ const DonateModal = ({
   onHideSetIsEdit,
   rowData,
   fundraiser,
+  donation,
   star,
   onSumitSetActiveCard,
 }) => {
@@ -93,7 +92,7 @@ const DonateModal = ({
                   {" "}
                   Monetory Donation{" "}
                 </option>
-                <option disabled={fundraiser} value="item">
+                <option disabled={fundraiser||donation} value="item">
                   {" "}
                   Charity Donation{" "}
                 </option>
@@ -104,7 +103,7 @@ const DonateModal = ({
               This field is required!
             </Form.Control.Feedback>
           </Form.Group>
-          {!fundraiser && (
+          {!(fundraiser || donation) && (
             <Form.Group className="form-group" as={Row}>
               <Form.Label column sm="4">
                 Donate<span className="required">*</span>
@@ -195,7 +194,7 @@ const DonateModal = ({
                   </InputGroup.Text>
                 </InputGroup>
                 <span style={{ position: "unset" }} className="info">
-                  *100 INR Donated = +1 Social Score
+                  *100 INR Donated = +5 Social Score points
                 </span>
               </Col>
 
@@ -219,19 +218,13 @@ const DonateModal = ({
           </Button>
           <Button
             disabled={
-              (category === "amount"
+              (fundraiser||donation?!amount:category === "amount"
                 ? !(frequency && (donateItem || amount))
-                : false) || isEdit
+                : false)
             }
             variant="success"
             className="button submit-button"
             onClick={() => {
-              let tempCategory = `${
-                category === "amount" ? "Monetory Donation" : "Charity Donation"
-              }`;
-              let tempDonation = `${
-                category === "amount" ? amount : donateItem
-              }`;
               var today = new Date();
               var dd = String(today.getDate()).padStart(2, "0");
               var mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -250,17 +243,17 @@ const DonateModal = ({
                 status: "Pending",
                 frequency,
                 social_score:
-                  category === "amount" ? Math.floor(amount / 100) : 10,
+                  category === "amount" ? Math.floor(amount / 20) : 50,
                 contribution_type_id: 0,
                 contribution_id: Math.floor(Math.random() * 10 + 1),
                 actions: "",
               };
               if (isEdit) {
-                dispatch(
-                  editContributionRequest(data, () => {
-                    handleClose();
-                  })
-                );
+                // dispatch(
+                //   editContributionRequest(data, () => {
+                //     handleClose();
+                //   })
+                // );
               } else {
                 dispatch(
                   submitContributionRequest(data, () => {

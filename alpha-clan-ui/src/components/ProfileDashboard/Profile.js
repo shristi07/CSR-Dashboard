@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Breadcrumbs from "../../config/Breadcrumbs";
 import { Link, Typography } from "@material-ui/core";
 import VolunteerModal from "../Modals/VolunteerModal";
@@ -8,7 +8,7 @@ import TableWrapper from "../Table/TableWrapper";
 import { OverlayTrigger,Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteContributionRequest } from "../../Actions/ProfileActions";
+import { deleteContributionRequest, fetchScore} from "../../Actions/ProfileActions";
 
 const Profile = ({crumbs}) => {
   const [activeCardId, setActiveCardId] = useState(0);
@@ -20,6 +20,7 @@ const Profile = ({crumbs}) => {
   const{
     myContributions,
     profileCard,
+    socialScore,
     userData
 
   }=useSelector((state) => ({
@@ -27,7 +28,10 @@ const Profile = ({crumbs}) => {
     userData: state.userReducer.userData,
   }));
 
+  useEffect(()=>{
+    dispatch(fetchScore());
 
+  },[myContributions])
   
   const onEditClick = useCallback(
     (selectedRows) => {
@@ -86,6 +90,7 @@ const Profile = ({crumbs}) => {
             <div className="card-widget-basic profile-container card-align">
               <div className="pic-container">
                 <img src="https://success-factor.s3.amazonaws.com/prod/profilePicFolder/408b47cd-af04-448f-9bcb-eea42ab4ae49_Shristi-Katiyar-Profile-Pitcure.jpeg" />
+                <p className="bottom-data">{userData.fullName}</p>
               </div>
               <div className="card-container">
                 {profileCard.map((card, index) => ( 
@@ -109,29 +114,16 @@ const Profile = ({crumbs}) => {
             <div className="card-widget-basic card-align score-container ">
               <div
                 className={`star-image ${
-                  userData?.social_score > 300
+                  socialScore > 5000
                     ? "gold-badge"
-                    : 300 < userData?.social_score > 100
+                    : 1000 < socialScore
                     ? "silver-badge"
-                    : "silver-badge"
+                    : "bronze-badge"
                 }`}
               ></div>
               <div className="score-info card-align ">
-                <div className="card-align information">
-                  <h6 className="key">Social Score</h6>
-                  <h6 className="value">{userData?.social_score}</h6>
-                </div>
-                <div className="card-align information">
-                  <h6 className="key">REAP Points</h6>
-                  <h6 className="value">250</h6>
-                </div>
-
-                <a
-                  href="https://newersworld.tothenew.com/reap/merchandise"
-                  class="button redeem btn submit-button"
-                >
-                  <i class="icon fa fa-gift"></i>Redeem
-                </a>
+                  <h3 >Social Score</h3>
+                  <h3 >{socialScore}</h3>
               </div>
             </div>
           </div>

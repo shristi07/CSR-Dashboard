@@ -1,20 +1,27 @@
 .sidebar-menu-container {
   .sidebar-menu {
     .nav-header {
+      p{color:#dfe4ed;
+      margin: unset;}
       img {
         border-radius: 50%;
         margin-left: 25px;
         margin-top: 33px;
       }
-      .user-name {
-        color: #DFE4ED;
-        margin-left: 25px;
-        font-size: 14px;
-        margin-top: 5px;
+      .dash-name {
+        color: #fff;
+        font-weight: 700;
+        padding: 0 30px;
+        margin: unset;
       }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 136px;
       background: url("../../assets/images/patterns/header-profile.png")
         no-repeat;
+        background-size: cover;
         
       a {
         color: #dfe4ed;

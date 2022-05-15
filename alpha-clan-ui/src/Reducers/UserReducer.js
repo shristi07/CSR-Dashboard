@@ -7,7 +7,7 @@ const initState = {
     "enabled": true,
     "firstName": "Shristi",
     "fullName": "Shristi Katiyar",
-    "social_score":530,
+    "social_score":50,
     "hasApprovals": false,
     "id": 1877,
     "isAdmin": false,

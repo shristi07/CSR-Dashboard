@@ -78,7 +78,7 @@ const Pahal = ({ crumbs }) => {
                       <span>@{drive?.contact?.name}</span>
                     </a>
                   </div>
-                  <DonateModal star={true} />
+                  <DonateModal star={true} donation={true} />
                 </div>
               ))}
             </div>

@@ -199,7 +199,7 @@ const FundRaiserModal = ({
           </Button>
           <Button
             disabled={
-              !(fundsFor && relation && upperLimit && dueDate) || isEdit
+              !(fundsFor && relation && upperLimit && dueDate)
             }
             variant="success"
             className="button submit-button"
@@ -226,7 +226,7 @@ const FundRaiserModal = ({
                 requested_on: today,
                 comment: summary,
                 status: "Pending",
-                social_score: 10,
+                social_score: 50,
                 contribution_type_id: 2,
                 actions: "",
                 ends: dueDate,

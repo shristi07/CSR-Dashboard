@@ -25,8 +25,9 @@ const AppSidebar = ({ userData, style }) => {
       <div className={`sidebar-menu-container `}>
         <div className={`sidebar-menu `}>
           <div className="nav-header">
-            <img width="50" height="50" src={userData?.profilePicUrl} />
-            <p className="user-name">{userData?.fullName}</p>
+            {/* <img width="50" height="50" src={userData?.profilePicUrl} /> */}
+            <h2 className="dash-name">KARTAVYA</h2>
+            <p>| Ek Nayi Pahal |</p>
           </div>
           <ul className="sidebar-menu-list">
             {data.map((item) => (

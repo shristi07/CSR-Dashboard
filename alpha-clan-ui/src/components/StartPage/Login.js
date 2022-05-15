@@ -11,7 +11,7 @@ class landingPage extends Component {
        {/* <a href=""class="btn btn-submit"> Login with TO THE NEW </a> */}
        <GoogleLogin
         clientId="305195431701-rnsdu77n2ulnjodd5v8o1siq9r1rc0lk.apps.googleusercontent.com"
-        buttonText="Login with TO THE NEW"
+        buttonText="Login with ABC ORGANISATION"
         onSuccess={this.responseGoogle}
         onFailure={this.responseGoogle}
         cookiePolicy={"none"}
