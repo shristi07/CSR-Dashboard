@@ -21,7 +21,7 @@ export default function (ComposedComponent) {
               </>
             }
           >
-            {true ? <ComposedComponent {...this.props} /> : <LandingPage />}
+            {isAuth ? <ComposedComponent {...this.props} /> : <LandingPage />}
           </Suspense>
         </React.Fragment>
       );

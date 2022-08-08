@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import {
   updateContributionRequest,
   submitContributionRequest,
+  submitDonationRequest,
+  fetchUserContributions,
 } from "../../Actions/ProfileActions";
 import { useDispatch } from "react-redux";
 const animatedComponents = makeAnimated();
@@ -258,6 +260,7 @@ const DonateModal = ({
                 dispatch(
                   submitContributionRequest(data, () => {
                     handleClose();
+                    dispatch(fetchUserContributions());
                   })
                 );
                 onSumitSetActiveCard();

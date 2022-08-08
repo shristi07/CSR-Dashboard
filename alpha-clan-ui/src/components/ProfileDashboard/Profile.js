@@ -8,7 +8,8 @@ import TableWrapper from "../Table/TableWrapper";
 import { OverlayTrigger,Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteContributionRequest, fetchScore} from "../../Actions/ProfileActions";
+import { deleteContributionRequest, fetchScore, fetchUserContributions} from "../../Actions/ProfileActions";
+import { getUserInfo } from "../../Actions/userActions";
 
 const Profile = ({crumbs}) => {
   const [activeCardId, setActiveCardId] = useState(0);
@@ -27,7 +28,10 @@ const Profile = ({crumbs}) => {
     ...state.profileReducer,
     userData: state.userReducer.userData,
   }));
-
+  useEffect(()=>{
+    dispatch(fetchUserContributions());
+    dispatch(getUserInfo());
+  },[])
   useEffect(()=>{
     dispatch(fetchScore());
 
@@ -44,6 +48,7 @@ const Profile = ({crumbs}) => {
   const extractFormat = (value) => {
     let tempArr = [];
     value?.forEach(item=>{for (let i in item){tempArr.push(item[i])}})
+    tempArr.pop();
     let format = [...new Set(tempArr)].toString();
     return format;
 
@@ -89,8 +94,8 @@ const Profile = ({crumbs}) => {
           <div className="my-profile">
             <div className="card-widget-basic profile-container card-align">
               <div className="pic-container">
-                <img src="https://success-factor.s3.amazonaws.com/prod/profilePicFolder/408b47cd-af04-448f-9bcb-eea42ab4ae49_Shristi-Katiyar-Profile-Pitcure.jpeg" />
-                <p className="bottom-data">{userData.fullName}</p>
+                <img src={userData?.profilePicUrl} />
+                <p className="bottom-data">{userData?.fullName}</p>
               </div>
               <div className="card-container">
                 {profileCard.map((card, index) => ( 

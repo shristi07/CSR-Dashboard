@@ -5,7 +5,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { useDispatch } from "react-redux";
-import { submitContributionRequest } from "../../Actions/ProfileActions";
+import { fetchUserContributions, submitContributionRequest, submitVolunteerRequest } from "../../Actions/ProfileActions";
 
 const animatedComponents = makeAnimated();
 
@@ -124,6 +124,7 @@ const VolunteerModal = ({
                 dispatch(
                   submitContributionRequest(data, () => {
                     handleClose();
+                    dispatch(fetchUserContributions());
                   })
                 );
                 onSumitSetActiveCard();

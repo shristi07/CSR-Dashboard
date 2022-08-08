@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { submitContributionRequest } from "../../Actions/ProfileActions";
+import { fetchUserContributions, submitContributionRequest, submitFundraiserRequest } from "../../Actions/ProfileActions";
 import { useDispatch } from "react-redux";
 
 const FundRaiserModal = ({
@@ -238,6 +238,7 @@ const FundRaiserModal = ({
                 dispatch(
                   submitContributionRequest(data, () => {
                     handleClose();
+                    dispatch(fetchUserContributions());
                   })
                 );
                 onSumitSetActiveCard();

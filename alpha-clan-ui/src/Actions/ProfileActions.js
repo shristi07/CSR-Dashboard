@@ -2,8 +2,8 @@ import { createAction } from "redux-actions";
 import { profileTypes } from "../constants";
 import axios from "axios";
 
-const requestContribution = createAction(
-  profileTypes.REQUEST_CONTRIBUTIONS_DATA
+const updateUserContributions = createAction(
+  profileTypes.UPDATE_USER_CONTRIBUTIONS
 );
 const deleteRequest = createAction(profileTypes.DELETE_REQUEST);
 export const fetchScore = createAction(profileTypes.FETCH_SCORE);
@@ -18,14 +18,33 @@ export const sendEmail = () => async (dispatch) => {
     console.log("Error while sending Email", e);
   }
 };
-export const submitContributionRequest = (data, cb) => (dispatch) => {
-  dispatch(requestContribution(data));
-  dispatch(sendEmail());
-  cb && cb();
-};
+export const fetchUserContributions = () => async dispatch => {
+  try {
+    const {data} = await axios({
+      method: "GET",
+      url: "http://localhost:5000/contributions",
+    });
+    dispatch(updateUserContributions(data));
+  } catch (e) {
+    console.log("Error while fetching User Volunteerings ", e)
+  }
+}
+
+export const submitContributionRequest = (req, cb) => async dispatch => {
+  try {
+    const {data} = await axios({
+      method: "POST",
+      url: "http://localhost:5000/contributions",
+      data:req,
+      params: {contributionTypeId:req.contribution_type_id}
+    });
+    cb && cb();
+  } catch (e) {
+    console.log('Error', e);
+  }
+}
+
 export const deleteContributionRequest = (data) => (dispatch) => {
   dispatch(deleteRequest(data));
 };
-export const updateContributionRequest = createAction(
-  profileTypes.UPDATE_CONTRIBUTION_REQUEST_DATA
-);
+
